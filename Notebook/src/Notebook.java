@@ -45,6 +45,37 @@ public class Notebook {
         }
     }
 
+    public void updateNote(String existingNote, String updatedNote)
+    {
+        if (null == existingNote)
+        {
+            System.out.println("Note for an updated is not provided");
+            return;
+        }
+        if (null == updatedNote)
+        {
+            System.out.println("Note cannot be added to empty one. There is separate method to remove note");
+            return;
+        }
+
+        int indexOfExistingNote = -1;
+        for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++)
+        {
+            if (notes[noteIndex].get().equals(existingNote))
+            {
+                indexOfExistingNote = noteIndex;
+            }
+        }
+        if (indexOfExistingNote != -1)
+        {
+            notes[indexOfExistingNote].set(updatedNote);
+        }
+        else
+        {
+            System.out.println("Given string doesn't exist, you can create a new one");
+        }
+    }
+
     private int indexFreePlace()
     {
         for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++)
