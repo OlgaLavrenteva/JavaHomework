@@ -1,8 +1,8 @@
 package notebook;
 
 public class Notebook {
-    private static final String defaultNotebookName = "A name is not assigned";
-    private static final int defaultSizeOfNotebook = 100;
+    private static final String DEFAULT_NOTEBOOK_NAME = "A name is not assigned";
+    private static final int DEFAULT_SIZE_OF_NOTEBOOK = 100;
     private String notebookName;
     private int sizeOfNotebook;
     private int numberOfNotes;
@@ -13,7 +13,7 @@ public class Notebook {
      */
 
     public Notebook() {
-        this(defaultNotebookName, defaultSizeOfNotebook);
+        this(DEFAULT_NOTEBOOK_NAME, DEFAULT_SIZE_OF_NOTEBOOK);
     }
 
     /**
@@ -21,7 +21,7 @@ public class Notebook {
      */
 
     public Notebook(String notebookName) {
-        this(notebookName, defaultSizeOfNotebook);
+        this(notebookName, DEFAULT_SIZE_OF_NOTEBOOK);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Notebook {
      */
 
     public Notebook(int initialSizeOfNotebook) {
-        this(defaultNotebookName, initialSizeOfNotebook);
+        this(DEFAULT_NOTEBOOK_NAME, initialSizeOfNotebook);
     }
 
     /**
@@ -37,8 +37,8 @@ public class Notebook {
      */
 
     public Notebook(String notebookName, int initialSizeOfNotebook) {
-        this.notebookName = null != notebookName ? notebookName : defaultNotebookName;
-        sizeOfNotebook = initialSizeOfNotebook > 0 ? initialSizeOfNotebook : defaultSizeOfNotebook;
+        this.notebookName = null != notebookName ? notebookName : DEFAULT_NOTEBOOK_NAME;
+        sizeOfNotebook = initialSizeOfNotebook > 0 ? initialSizeOfNotebook : DEFAULT_SIZE_OF_NOTEBOOK;
         notes = new Note[sizeOfNotebook];
     }
 
@@ -48,7 +48,7 @@ public class Notebook {
      */
 
     public void setNotebookName(String newNotebookName) {
-        notebookName = null != newNotebookName ? newNotebookName : defaultNotebookName;
+        notebookName = null != newNotebookName ? newNotebookName : DEFAULT_NOTEBOOK_NAME;
         System.out.println("New notebook name is " + notebookName);
     }
 
@@ -65,7 +65,7 @@ public class Notebook {
                 extendNotebook();
             }
             notes[numberOfNotes] = new Note(newNote);
-            numberOfNotes += 1;
+            numberOfNotes++;
             System.out.println("Added note: " + newNote + "; Number of Notes= " + numberOfNotes);
         }
     }
@@ -119,7 +119,7 @@ public class Notebook {
             }
             notes = updatedNotes;
             System.out.println("Removed note: " + existingNote);
-            numberOfNotes -= 1;
+            numberOfNotes--;
             shrinkNotebook();
         } else {
             System.out.println("Given note doesn't exist");
