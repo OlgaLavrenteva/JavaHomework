@@ -1,80 +1,80 @@
 package notebook;
 
 public class Notebook {
+    private static final String defaultNotebookName = "A name is not assigned";
+    private static final int defaultSizeOfNotebook = 100;
     private String notebookName;
     private int sizeOfNotebook;
     private int numberOfNotes;
     private Note[] notes;
 
+    /**
+     * Default Notebook class constructor
+     */
+
     public Notebook() {
-        this.notebookName = "A name is not assigned";
-        this.sizeOfNotebook = 100;
-        notes = new Note[this.sizeOfNotebook];
-        //System.out.println("Constructor without params for Notebook");
+        this(defaultNotebookName, defaultSizeOfNotebook);
     }
+
+    /**
+     * Notebook class constructor with specified notebook name
+     */
 
     public Notebook(String notebookName) {
-        if (null != notebookName) {
-            this.notebookName = notebookName;
-        }
-        else {
-            this.notebookName = "A name is not assigned";
-        }
-        this.sizeOfNotebook = 100;
-        this.notes = new Note[this.sizeOfNotebook];
-        //System.out.println("Constructor for Notebook with notebookName = " + notebookName);
+        this(notebookName, defaultSizeOfNotebook);
     }
+
+    /**
+     * Notebook class constructor with specified notebook size
+     */
 
     public Notebook(int initialSizeOfNotebook) {
-        this.notebookName = "A name is not assigned";
-        if (initialSizeOfNotebook > 0) {
-            this.sizeOfNotebook = initialSizeOfNotebook;
-        }
-        else {
-            this.sizeOfNotebook = 100;
-        }
-        this.notes = new Note[this.sizeOfNotebook];
-        //System.out.println("Constructor for Notebook with initial size = " + initialSizeOfNotebook);
+        this(defaultNotebookName, initialSizeOfNotebook);
     }
+
+    /**
+     * Notebook class constructor with specified notebook name and size
+     */
 
     public Notebook(String notebookName, int initialSizeOfNotebook) {
-        if (null != notebookName) {
-            this.notebookName = notebookName;
-        }
-        else {
-            this.notebookName = "A name is not assigned";
-        }
-        if (initialSizeOfNotebook > 0) {
-            this.sizeOfNotebook = initialSizeOfNotebook;
-        }
-        else {
-            this.sizeOfNotebook = 100;
-        }
-        this.notes = new Note[this.sizeOfNotebook];
-        //System.out.println("Constructor for Notebook with notebookName = " + notebookName + " and initial size = " + initialSizeOfNotebook);
+        this.notebookName = null != notebookName ? notebookName : defaultNotebookName;
+        sizeOfNotebook = initialSizeOfNotebook > 0 ? initialSizeOfNotebook : defaultSizeOfNotebook;
+        notes = new Note[sizeOfNotebook];
     }
 
+    /**
+     * Setter of notebook name
+     * @param newNotebookName new notebook name
+     */
+
     public void setNotebookName(String newNotebookName) {
-        if (null != newNotebookName) {
-            notebookName = newNotebookName;
-        }
-        else {
-            notebookName = "A name is not assigned";
-        }
+        notebookName = null != newNotebookName ? newNotebookName : defaultNotebookName;
         System.out.println("New notebook name is " + notebookName);
     }
+
+    /**
+     * Adding of new note to the notebook
+     * @param newNote new note to be added to the notebook
+     */
 
     public void addNote(String newNote) {
         if (null == newNote) {
             System.out.println("Empty note cannot be added");
-        }
-        else {
-            int indexForAdd = indexFreePlace();
-            notes[indexForAdd] = new Note(newNote);
+        } else {
+            if (numberOfNotes == sizeOfNotebook) {
+                extendNotebook();
+            }
+            notes[numberOfNotes] = new Note(newNote);
             numberOfNotes += 1;
             System.out.println("Added note: " + newNote + "; Number of Notes= " + numberOfNotes);
         }
     }
+
+    /**
+     * Upfating of existing note in the notebook
+     * @param existingNote existing note that have to be updated
+     * @param updatedNote new note that have to be placed instead of existing one
+     */
 
     public void updateNote(String existingNote, String updatedNote) {
         if (null == existingNote) {
@@ -88,13 +88,17 @@ public class Notebook {
 
         int indexOfExistingNote = indexOfExistingNote(existingNote);
         if (indexOfExistingNote != -1) {
-            notes[indexOfExistingNote].set(updatedNote);
+            notes[indexOfExistingNote].setRecord(updatedNote);
             //System.out.println("Updated note to:" + updatedNote);
-        }
-        else {
+        } else {
             System.out.println("Given note doesn't exist, you can create a new one");
         }
     }
+
+    /**
+     * Removing of existing note from the notebook
+     * @param existingNote existing note that have to be removed
+     */
 
     public void removeNote(String existingNote) {
         if (null == existingNote) {
@@ -104,40 +108,73 @@ public class Notebook {
 
         int indexOfExistingNote = indexOfExistingNote(existingNote);
         if (indexOfExistingNote != -1) {
-            notes[indexOfExistingNote] = null;
+            Note[] updatedNotes = new Note[sizeOfNotebook];
+            //check that not first note is going to be removed
+            if (indexOfExistingNote > 0) {
+                System.arraycopy(notes,0, updatedNotes,0,indexOfExistingNote);
+            }
+            //check that not last note is going to be removed
+            if (indexOfExistingNote+1 < numberOfNotes) {
+                System.arraycopy(notes,indexOfExistingNote+1, updatedNotes,indexOfExistingNote,numberOfNotes-indexOfExistingNote-1);
+            }
+            notes = updatedNotes;
             System.out.println("Removed note: " + existingNote);
             numberOfNotes -= 1;
             shrinkNotebook();
-        }
-        else {
+        } else {
             System.out.println("Given note doesn't exist");
         }
     }
 
+    /**
+     * Printing all notebook data
+     */
+
     public void showAllNotes() {
-        System.out.println(toString());
+        System.out.println(this);
     }
+
+    /**
+     * Override of toString() method
+     * @return notebook data - name, size, free places and all notes
+     */
+    @Override public String toString() {
+        StringBuilder notebookString = new StringBuilder(notebookName);
+        notebookString.append('\n');
+        notebookString.append("Notebook size: ");
+        notebookString.append(sizeOfNotebook);
+        notebookString.append('\n');
+        notebookString.append("Free places: ");
+        notebookString.append(sizeOfNotebook-numberOfNotes);
+
+        for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++) {
+            if (notes[noteIndex] != null) {
+                notebookString.append('\n');
+                notebookString.append(notes[noteIndex].getRecord());
+            }
+        }
+
+        return notebookString.toString();
+    }
+
+    /**
+     * Searching of note in the notebook
+     * @param existingNote note index of that have to be found
+     * @return returns index of existingNote or -1 if the note is note in the notebook
+     */
 
     private int indexOfExistingNote(String existingNote) {
         for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++) {
-            if (notes[noteIndex]!= null && notes[noteIndex].get().equals(existingNote)) {
+            if (notes[noteIndex]!= null && notes[noteIndex].getRecord().equals(existingNote)) {
                 return noteIndex;
             }
         }
         return -1;
     }
 
-    private int indexFreePlace() {
-        for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++) {
-            if (null == notes[noteIndex]) {
-                return noteIndex;
-            }
-        }
-
-        int indexOfExtendStart = sizeOfNotebook;
-        extendNotebook();
-        return indexOfExtendStart;
-    }
+    /**
+     * Extends notebook twice
+     */
 
     private void extendNotebook() {
         int extendedSizeOfNotebook = sizeOfNotebook*2;
@@ -148,12 +185,14 @@ public class Notebook {
         sizeOfNotebook = extendedSizeOfNotebook;
     }
 
+    /**
+     * Reduces notebook twice if less than 25% of places are allocated and if size of notebook more than 100
+     */
+
     private void shrinkNotebook() {
         if (numberOfNotes>=(int) (0.25*sizeOfNotebook) || sizeOfNotebook <= 100) {
-            //System.out.println("Notebook was not shrank. Size is " + sizeOfNotebook + ". Number of notes is " + numberOfNotes);
             return;
-        }
-        else {
+        } else {
             int reducedSizeOfNotebook = Math.abs(sizeOfNotebook/2);
             Note[] reducedNotes = new Note[reducedSizeOfNotebook];
             for (int indCur = 0, indRed = 0; indCur<sizeOfNotebook && indRed<reducedSizeOfNotebook; indCur++) {
@@ -166,17 +205,5 @@ public class Notebook {
             System.out.println("Notebook was shrank from " + sizeOfNotebook + " to " + reducedSizeOfNotebook);
             sizeOfNotebook = reducedSizeOfNotebook;
         }
-    }
-
-    public String toString() {
-        String notebook = notebookName + '\n' + "Notebook size: " + sizeOfNotebook + '\n' + "Free places: " + (sizeOfNotebook-numberOfNotes);
-
-        for (int noteIndex = 0; noteIndex < sizeOfNotebook; noteIndex++) {
-            if (notes[noteIndex] != null) {
-                notebook = notebook + '\n' + notes[noteIndex].get();
-            }
-        }
-
-        return notebook;
     }
 }

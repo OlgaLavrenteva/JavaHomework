@@ -14,14 +14,12 @@ public class HW1Solution {
         notebook1.addNote("Third note");
 
         //exceed notebook size
-        for (int i=4; i<202; i++)
-        {
+        for (int i=4; i<202; i++) {
             notebook1.addNote(i + " note");
         }
 
         //remove notes without shrink of notebook
-        for (int i=4; i<155; i++)
-        {
+        for (int i=4; i<155; i++) {
             notebook1.removeNote(i + " note");
         }
 
@@ -50,46 +48,67 @@ public class HW1Solution {
         notebook4.setNotebookName("Renamed my notebook 4");
         notebook4.showAllNotes();
 
+        //remove only one existing note
+        Notebook notebook5 = new Notebook("My notebook 5", 1);
+        notebook5.addNote("First note");
+        notebook5.removeNote("First note");
+        notebook5.showAllNotes();
+
+        //remove first note
+        Notebook notebook6 = new Notebook("My notebook 6", 1);
+        notebook6.addNote("First note");
+        notebook6.addNote("Second note");
+        notebook6.removeNote("First note");
+        notebook6.showAllNotes();
+
+        //remove last note
+        Notebook notebook7 = new Notebook("My notebook 7", 1);
+        notebook7.addNote("First note");
+        notebook7.addNote("Second note");
+        notebook7.removeNote("Second note");
+        notebook7.showAllNotes();
+
         //Negative cases:
         //negative notebook size and empty name
         String str = null;
 
-        Notebook notebook5 = new Notebook(str, -3);
-        notebook5.showAllNotes();
+        Notebook notebook8 = new Notebook(str, -3);
+        notebook8.showAllNotes();
 
-        Notebook notebook6 = new Notebook(str);
-        notebook6.showAllNotes();
+        Notebook notebook9 = new Notebook(str);
+        notebook9.showAllNotes();
 
-        Notebook notebook7 = new Notebook(-3);
-        notebook7.addNote("First note");
-        notebook7.showAllNotes();
+        Notebook notebook10 = new Notebook(-3);
+        notebook10.addNote("First note");
+        notebook10.showAllNotes();
 
-        Notebook notebook8 = new Notebook("My notebook 8", 1);
-        notebook8.setNotebookName(str);
+        Notebook notebook11 = new Notebook("My notebook 11", 1);
+        notebook11.setNotebookName(str);
+        notebook11.showAllNotes();
 
         //adding of empty note
-        Notebook notebook9 = new Notebook("My notebook 9", 10);
-        notebook9.addNote(str);
-        notebook9.showAllNotes();
+        Notebook notebook12 = new Notebook("My notebook 12", 10);
+        notebook12.addNote(str);
+        notebook12.showAllNotes();
 
         //updating of note to empty
-        notebook9.addNote("Some note");
-        notebook9.updateNote("Some note", str);
-        notebook9.showAllNotes();
+        notebook12.addNote("Some note");
+        notebook12.updateNote("Some note", str);
+        notebook12.showAllNotes();
 
         //updating of null note
-        notebook9.updateNote(str, "Updated note");
-        notebook9.showAllNotes();
+        notebook12.updateNote(str, "Updated note");
+        notebook12.showAllNotes();
 
         //updating of unexisting note
-        notebook9.updateNote("Some unexisting note", "Updated note");
-        notebook9.showAllNotes();
+        notebook12.updateNote("Some unexisting note", "Updated note");
+        notebook12.showAllNotes();
 
         //removing of null note
-        notebook9.removeNote(str);
+        notebook12.removeNote(str);
 
         //removing of unexisting note
-        notebook9.removeNote("Some unexisting note");
-        notebook9.showAllNotes();
+        notebook12.removeNote("Some unexisting note");
+        notebook12.showAllNotes();
     }
 }
