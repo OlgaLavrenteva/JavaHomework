@@ -1,5 +1,7 @@
 package notebook;
 
+import notebook.Note;
+
 public class Notebook {
     private static final String DEFAULT_NOTEBOOK_NAME = "A name is not assigned";
     private static final int DEFAULT_SIZE_OF_NOTEBOOK = 100;
@@ -9,7 +11,7 @@ public class Notebook {
     private Note[] notes;
 
     /**
-     * Default Notebook class constructor
+     * Default notebook.Notebook class constructor
      */
 
     public Notebook() {
@@ -17,7 +19,7 @@ public class Notebook {
     }
 
     /**
-     * Notebook class constructor with specified notebook name
+     * notebook.Notebook class constructor with specified notebook name
      */
 
     public Notebook(String notebookName) {
@@ -25,7 +27,7 @@ public class Notebook {
     }
 
     /**
-     * Notebook class constructor with specified notebook size
+     * notebook.Notebook class constructor with specified notebook size
      */
 
     public Notebook(int initialSizeOfNotebook) {
@@ -33,7 +35,7 @@ public class Notebook {
     }
 
     /**
-     * Notebook class constructor with specified notebook name and size
+     * notebook.Notebook class constructor with specified notebook name and size
      */
 
     public Notebook(String notebookName, int initialSizeOfNotebook) {
@@ -78,11 +80,11 @@ public class Notebook {
 
     public void updateNote(String existingNote, String updatedNote) {
         if (null == existingNote) {
-            System.out.println("Note for update is not provided");
+            System.out.println("notebook.Note for update is not provided");
             return;
         }
         if (null == updatedNote) {
-            System.out.println("Note cannot be updated to empty one. There is separate method to remove note");
+            System.out.println("notebook.Note cannot be updated to empty one. There is separate method to remove note");
             return;
         }
 
@@ -141,7 +143,7 @@ public class Notebook {
     @Override public String toString() {
         StringBuilder notebookString = new StringBuilder(notebookName);
         notebookString.append('\n');
-        notebookString.append("Notebook size: ");
+        notebookString.append("notebook.Notebook size: ");
         notebookString.append(sizeOfNotebook);
         notebookString.append('\n');
         notebookString.append("Free places: ");
@@ -181,7 +183,7 @@ public class Notebook {
         Note[] extendedNotes = new Note[extendedSizeOfNotebook];
         System.arraycopy(notes,0, extendedNotes,0,sizeOfNotebook);
         notes = extendedNotes;
-        System.out.println("Notebook was extended from " + sizeOfNotebook + " to " + extendedSizeOfNotebook);
+        System.out.println("notebook.Notebook was extended from " + sizeOfNotebook + " to " + extendedSizeOfNotebook);
         sizeOfNotebook = extendedSizeOfNotebook;
     }
 
@@ -202,7 +204,7 @@ public class Notebook {
                 }
             }
             notes = reducedNotes;
-            System.out.println("Notebook was shrank from " + sizeOfNotebook + " to " + reducedSizeOfNotebook);
+            System.out.println("notebook.Notebook was shrank from " + sizeOfNotebook + " to " + reducedSizeOfNotebook);
             sizeOfNotebook = reducedSizeOfNotebook;
         }
     }

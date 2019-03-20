@@ -1,6 +1,7 @@
+//import notebook.*;
 import notebook.*;
 
-public class HW1Solution {
+public class HW1Solution{
     public static void main(String[] args) {
         // Main is used to do some tests
 

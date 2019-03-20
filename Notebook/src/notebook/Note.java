@@ -4,7 +4,7 @@ public class Note {
     private String record;
 
     /**
-     * Note class constructor
+     * notebook.Note class constructor
      */
 
     public Note(String record) {
