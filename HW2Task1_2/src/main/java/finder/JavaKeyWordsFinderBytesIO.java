@@ -2,9 +2,8 @@ package main.java.finder;
 
 import java.io.*;
 
-public class JavaKeyWordsFinder{
-    //static String JAVA_KEY_WORDS = "package for while class if";
-    static String JAVA_KEY_WORDS = null;
+public class JavaKeyWordsFinderBytesIO {
+    static final String JAVA_KEY_WORDS = "package for while class if";
 
     /**
      * The method takes inputFile, looks for Java Key Words listed in JAVA_KEY_WORDS constant and then puts matches and their count into outputFile.
