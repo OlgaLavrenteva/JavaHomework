@@ -7,15 +7,29 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class KeyWordsFinder {
+public class KeyWordsFinder{
     private String keyWords;
 
     /**
      * KeyWordsFinder constructor takes String with listed Key Words for searching.
      * @param keyWords
      */
-    public KeyWordsFinder(String keyWords) {
-        this.keyWords = keyWords;
+    public KeyWordsFinder(String keyWords) throws Exception{
+        this.setKeyWords(keyWords);
+    }
+
+    /**
+     * Setter method for keyWords field. The method can throw exception in case of null string.
+     * @param keyWords
+     * @throws Exception
+     */
+
+    public void setKeyWords(String keyWords)throws Exception{
+        if (keyWords==null){
+            throw new Exception("String for search should be not null.");
+        } else{
+            this.keyWords = keyWords.trim();
+        }
     }
 
     /**
@@ -23,16 +37,16 @@ public class KeyWordsFinder {
      * @param input
      * @return
      */
-    public String findKeyWords(String input) {
+    public String findKeyWords(String input){
         String[] arrKeyWords = keyWords.split(" ");
         HashMap<String, Integer> matches = new HashMap<String, Integer>();
 
-        for(int i=0; i<arrKeyWords.length; i++) {
+        for(int i=0; i<arrKeyWords.length; i++){
             String substr = "(^|[^a-zA-Z])" + arrKeyWords[i] + "([^a-zA-Z]|^)";
             Pattern p = Pattern.compile(substr);
             Matcher m = p.matcher(input);
             int localCounter = 0;
-            while(m.find()) {
+            while(m.find()){
                 localCounter++;
             }
             if (localCounter > 0){

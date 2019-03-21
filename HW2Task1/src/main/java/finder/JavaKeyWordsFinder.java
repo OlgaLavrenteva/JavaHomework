@@ -2,8 +2,9 @@ package main.java.finder;
 
 import java.io.*;
 
-public class JavaKeyWordsFinder {
-    static String JAVA_KEY_WORDS = "package for while class if";
+public class JavaKeyWordsFinder{
+    //static String JAVA_KEY_WORDS = "package for while class if";
+    static String JAVA_KEY_WORDS = null;
 
     /**
      * The method takes inputFile, looks for Java Key Words listed in JAVA_KEY_WORDS constant and then puts matches and their count into outputFile.
@@ -15,12 +16,18 @@ public class JavaKeyWordsFinder {
         try(BufferedInputStream bufInpFileStream = new BufferedInputStream(new FileInputStream(inputFile),1024)){
             StringBuilder input = new StringBuilder("");
             byte[] bytes = new byte[1024];
-            while (bufInpFileStream.available() > 0) {
+            while (bufInpFileStream.available() > 0){
                 int bytesRead = bufInpFileStream.read(bytes);
                 input.append(new String(bytes,0,bytesRead));
             }
-            KeyWordsFinder javaWordsFinder = new KeyWordsFinder(JAVA_KEY_WORDS);
-            foundMatches = javaWordsFinder.findKeyWords(input.toString());
+
+            try{
+                KeyWordsFinder javaWordsFinder = new KeyWordsFinder(JAVA_KEY_WORDS);
+                foundMatches = javaWordsFinder.findKeyWords(input.toString());
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
