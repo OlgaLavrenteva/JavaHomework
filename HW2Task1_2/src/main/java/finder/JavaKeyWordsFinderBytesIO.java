@@ -13,7 +13,13 @@ public class JavaKeyWordsFinderBytesIO {
      * @param inputFile - Java Key Words will be searched in the file
      * @param outputFile - found in inputFile Java Key Words and their count will be stored in outputFile
      */
-    static void findJavaKeyWords(String inputFile, String outputFile){
+    public static void findJavaKeyWords(String inputFile, String outputFile) throws Exception{
+        if (inputFile==null){
+            throw new Exception("Input file is not passed");
+        }
+        if (outputFile==null){
+            throw new Exception("Output file is not passed");
+        }
         String foundMatches = "";
         try(BufferedInputStream bufInpFileStream = new BufferedInputStream(new FileInputStream(inputFile),1024)){
             StringBuilder input = new StringBuilder("");

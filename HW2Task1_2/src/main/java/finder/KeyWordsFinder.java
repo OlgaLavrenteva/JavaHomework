@@ -23,7 +23,7 @@ public class KeyWordsFinder{
 
     public void setKeyWords(String keyWords)throws Exception{
         if (keyWords==null){
-            throw new Exception("String for search should be not null.");
+            throw new Exception("String with key words should be not null.");
         } else{
             this.keyWords = keyWords.trim();
         }
@@ -42,12 +42,15 @@ public class KeyWordsFinder{
      * @param input
      * @return
      */
-    public String findKeyWords(String input){
+    public String findKeyWords(String input) throws Exception{
+        if (input==null){
+            throw new Exception("String for search should be not null.");
+        }
         String[] arrKeyWords = keyWords.split(" ");
         HashMap<String, Integer> matches = new HashMap<String, Integer>();
 
         for(int i=0; i<arrKeyWords.length; i++){
-            String substr = "(^|[^a-zA-Z])" + arrKeyWords[i] + "([^a-zA-Z]|^)";
+            String substr = "(^|[^a-zA-Z])" + arrKeyWords[i] + "([^a-zA-Z]|$)";
             Pattern p = Pattern.compile(substr);
             Matcher m = p.matcher(input);
             int localCounter = 0;

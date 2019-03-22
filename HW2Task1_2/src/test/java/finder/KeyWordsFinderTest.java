@@ -8,26 +8,96 @@ import static org.junit.Assert.assertTrue;
 
 public class KeyWordsFinderTest {
     @Test
-    public void validKeyWordsFinderCreation(){
-        String nonEmptyString = "for if";
-        try{
-            KeyWordsFinder keyWordsFinder = new KeyWordsFinder(nonEmptyString);
-            assertTrue(keyWordsFinder.getKeyWords().equals(nonEmptyString));
+    public void validKeyWordsFinderCreation() throws Exception{
+        String notNullString = "for if";
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(notNullString);
+        assertTrue(keyWordsFinder.getKeyWords().equals(notNullString));
+    }
+
+    @Test
+    public void setValidKeyWords() throws Exception{
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder("setValidKeyWords");
+        String notNullString = "for if";
+        keyWordsFinder.setKeyWords(notNullString);
+        assertTrue(keyWordsFinder.getKeyWords().equals(notNullString));
+    }
+
+    @Test
+    public void inputFullyMatchesPattern() throws Exception{
+        String pattern = "for if";
+        String input = "for if";
+        String expectedResult = "2\nfor: 1\nif: 1";
+        String result = null;
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+        result = keyWordsFinder.findKeyWords(input);
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void inputPartiallyMatchesPattern() throws Exception{
+        String pattern = "for ifcase continue";
+        String input = "continue if case";
+        String expectedResult = "1\ncontinue: 1";
+        String result = null;
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+        result = keyWordsFinder.findKeyWords(input);
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void inputDoesNotMatchesPattern() throws Exception{
+        String pattern = "for if";
+        String input = "case abstract";
+        String expectedResult = "0";
+        String result = null;
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+        result = keyWordsFinder.findKeyWords(input);
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void inputIsEmpty() throws Exception{
+        String pattern = "for if";
+        String input = "";
+        String expectedResult = "0";
+        String result = null;
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+        result = keyWordsFinder.findKeyWords(input);
+        assertTrue(result.equals(expectedResult));
+    }
+
+    @Test
+    public void failedAttemptToCreateKeyWordFinderWithNullKeyWords(){
+        String nullString = null;
+        try {
+            KeyWordsFinder keyWordsFinder = new KeyWordsFinder(nullString);
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            assertTrue(e.getMessage().equals("String with key words should be not null."));
         }
     }
 
     @Test
-    public void setValidKeyWords(){
+    public void failedAttemptToSetNullKeyWords(){
         try{
             KeyWordsFinder keyWordsFinder = new KeyWordsFinder("setValidKeyWords");
-            String nonEmptyString = "for if";
-            keyWordsFinder.setKeyWords(nonEmptyString);
-            assertTrue(keyWordsFinder.getKeyWords().equals(nonEmptyString));
+            String nullString = null;
+            keyWordsFinder.setKeyWords(nullString);
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            assertTrue(e.getMessage().equals("String with key words should be not null."));
         }
     }
 
+    @Test
+    public void inputIsNull(){
+        String pattern = "for if";
+        String input = null;
+        String expectedResult = "0";
+        String result = null;
+        try {
+            KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+            result = keyWordsFinder.findKeyWords(input);
+        } catch(Exception e){
+            assertTrue(e.getMessage().equals("String for search should be not null."));
+        }
+    }
 }
