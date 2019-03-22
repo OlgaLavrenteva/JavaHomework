@@ -16,11 +16,10 @@ public class KeyWordsFinder{
     }
 
     /**
-     * Setter method for keyWords field. The method can throw exception in case of null string.
+     * Setter method for keyWords field. The method throws exception in case of null string.
      * @param keyWords
      * @throws Exception
      */
-
     public void setKeyWords(String keyWords)throws Exception{
         if (keyWords==null){
             throw new Exception("String with key words should be not null.");

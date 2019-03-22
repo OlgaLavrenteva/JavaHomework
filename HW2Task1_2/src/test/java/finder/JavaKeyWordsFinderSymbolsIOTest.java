@@ -1,6 +1,6 @@
 package test.java.finder;
 
-import main.java.finder.JavaKeyWordsFinderBytesIO;
+import main.java.finder.JavaKeyWordsFinderSymbolsIO;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -8,7 +8,7 @@ import java.io.FileReader;
 
 import static org.junit.Assert.assertTrue;
 
-public class JavaKeyWordsFinderBytesIOTest {
+public class JavaKeyWordsFinderSymbolsIOTest {
     String currentDir = System.getProperty("user.dir");
     String outputFile = currentDir + "\\out\\jkw_result.txt";
 
@@ -17,7 +17,7 @@ public class JavaKeyWordsFinderBytesIOTest {
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\FileForAnalyzingAllJKW.java";
 
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -48,7 +48,7 @@ public class JavaKeyWordsFinderBytesIOTest {
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\FileForAnalyzingUseCase.java";
 
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -75,7 +75,7 @@ public class JavaKeyWordsFinderBytesIOTest {
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
 
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -100,7 +100,7 @@ public class JavaKeyWordsFinderBytesIOTest {
     public void inputFileDoesNotExist(){
         String inputFile = "NotExistingFile";
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             assertTrue(e.getMessage().equals("NotExistingFile doesn't exist."));
         }
@@ -111,7 +111,7 @@ public class JavaKeyWordsFinderBytesIOTest {
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
         outputFile = "NotExistingFile";
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             assertTrue(e.getMessage().equals("NotExistingFile doesn't exist."));
         }
@@ -121,7 +121,7 @@ public class JavaKeyWordsFinderBytesIOTest {
     public void inputFileIsNull(){
         String inputFile = null;
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             assertTrue(e.getMessage().equals("Input file is not passed."));
         }
@@ -132,9 +132,10 @@ public class JavaKeyWordsFinderBytesIOTest {
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
         outputFile = null;
         try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
+            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
             assertTrue(e.getMessage().equals("Output file is not passed."));
         }
     }
 }
+
