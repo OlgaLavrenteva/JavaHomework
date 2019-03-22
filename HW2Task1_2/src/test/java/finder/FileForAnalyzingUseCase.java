@@ -2,7 +2,7 @@ package test.java.finder;
 
 import notebook.Note;
 
-public class FileForAnalyzing1 {
+public class FileForAnalyzingUseCase {
     private static final String DEFAULT_NOTEBOOK_NAME = "A name is not assigned";
     private static final int DEFAULT_SIZE_OF_NOTEBOOK = 100;
     private String notebookName;
@@ -14,7 +14,7 @@ public class FileForAnalyzing1 {
      * Default notebook.Notebook class constructor
      */
 
-    public FileForAnalyzing1() {
+    public FileForAnalyzingUseCase() {
         this(DEFAULT_NOTEBOOK_NAME, DEFAULT_SIZE_OF_NOTEBOOK);
     }
 
@@ -22,7 +22,7 @@ public class FileForAnalyzing1 {
      * notebook.Notebook class constructor with specified notebook name
      */
 
-    public FileForAnalyzing1(String notebookName) {
+    public FileForAnalyzingUseCase(String notebookName) {
         this(notebookName, DEFAULT_SIZE_OF_NOTEBOOK);
     }
 
@@ -30,7 +30,7 @@ public class FileForAnalyzing1 {
      * notebook.Notebook class constructor with specified notebook size
      */
 
-    public FileForAnalyzing1(int initialSizeOfNotebook) {
+    public FileForAnalyzingUseCase(int initialSizeOfNotebook) {
         this(DEFAULT_NOTEBOOK_NAME, initialSizeOfNotebook);
     }
 
@@ -38,7 +38,7 @@ public class FileForAnalyzing1 {
      * notebook.Notebook class constructor with specified notebook name and size
      */
 
-    public FileForAnalyzing1(String notebookName, int initialSizeOfNotebook) {
+    public FileForAnalyzingUseCase(String notebookName, int initialSizeOfNotebook) {
         this.notebookName = null != notebookName ? notebookName : DEFAULT_NOTEBOOK_NAME;
         sizeOfNotebook = initialSizeOfNotebook > 0 ? initialSizeOfNotebook : DEFAULT_SIZE_OF_NOTEBOOK;
         notes = new Note[sizeOfNotebook];

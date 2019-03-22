@@ -30,6 +30,14 @@ public class KeyWordsFinder{
     }
 
     /**
+     * Getter method for keyWords field.
+     * @return
+     */
+    public String getKeyWords(){
+        return keyWords;
+    }
+
+    /**
      * The method takes string as a parameter, looks for keyWords in the string and returns string with matches and their count.
      * @param input
      * @return

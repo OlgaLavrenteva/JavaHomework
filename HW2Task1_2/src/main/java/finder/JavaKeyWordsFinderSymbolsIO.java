@@ -3,7 +3,10 @@ package main.java.finder;
 import java.io.*;
 
 public class JavaKeyWordsFinderSymbolsIO {
-    static final String JAVA_KEY_WORDS = "package for while class if";
+    static final String JAVA_KEY_WORDS = "abstract continue for new switch assert default goto package synchronized " +
+            "boolean do if private this break double implements protected throw byte else import public throws case " +
+            "enum instanceof return transient catch extends int short try char final interface static void class finally " +
+            "long strictfp volatile const float native super while";
 
     /**
      * The method takes inputFile, looks for Java Key Words listed in JAVA_KEY_WORDS constant and then puts matches and their count into outputFile.
@@ -17,6 +20,7 @@ public class JavaKeyWordsFinderSymbolsIO {
             String inputLine = "";
             while ((inputLine = bufReader.readLine()) != null){
                 input.append(inputLine);
+                input.append(" ");
             }
 
             try{
