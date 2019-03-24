@@ -11,12 +11,12 @@ public class Film {
         setTitle(title);
     }
 
-    public Film(HashSet<Actor> actors) throws Exception{
-        setActors(actors);
-    }
-
     public Film(Actor actor) throws Exception{
         setActors(actor);
+    }
+
+    public Film(HashSet<Actor> actors) throws Exception{
+        setActors(actors);
     }
 
     public void setTitle(String title) throws Exception{
@@ -26,18 +26,20 @@ public class Film {
         this.title=title;
     }
 
+    public void setActors(Actor actor) throws Exception{
+        if(actor==null){
+            throw new Exception("Actor is null.");
+        }
+        HashSet<Actor> changedActors = new HashSet<Actor>();
+        changedActors.add(actor);
+        actors=changedActors;
+    }
+
     public void setActors(HashSet<Actor> actors) throws Exception{
         if(actors==null){
             throw new Exception("Actors are null.");
         }
         this.actors=actors;
-    }
-
-    public void setActors(Actor actor) throws Exception{
-        if(actor==null){
-            throw new Exception("Actor is null.");
-        }
-        this.actors.add(actor);
     }
 
     public String getTitle(){
@@ -48,13 +50,23 @@ public class Film {
         return actors;
     }
 
+    public void addActor(Actor actor){
+        if(actor!=null){
+            actors.add(actor);
+        }
+    }
+
+    public void removeActor(Actor actor){
+        actors.remove(actor);
+    }
+
     @Override
     public String toString(){
         StringBuilder film = new StringBuilder("Film title: ");
         film.append(title);
-        film.append(" Actors:");
+        film.append("\nActors:");
         for (Actor actor: actors){
-            film.append(" ");
+            film.append("\n");
             film.append(actor.toString());
         }
         return film.toString();
