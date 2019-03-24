@@ -1,9 +1,10 @@
 package main.java.films_collection;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Film {
+public class Film implements Serializable {
     private String title;
     private HashSet<Actor> actors;
 

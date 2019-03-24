@@ -1,8 +1,9 @@
 package main.java.films_collection;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
-public class FilmsCollection{
+public class FilmsCollection implements Serializable {
     private String title;
     private HashSet<Film> films;
 
