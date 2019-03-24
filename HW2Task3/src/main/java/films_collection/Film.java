@@ -12,11 +12,13 @@ public class Film implements Serializable {
         setTitle(title);
     }
 
-    public Film(Actor actor) throws Exception{
+    public Film(String title, Actor actor) throws Exception{
+        setTitle(title);
         setActors(actor);
     }
 
-    public Film(HashSet<Actor> actors) throws Exception{
+    public Film(String title, HashSet<Actor> actors) throws Exception{
+        setTitle(title);
         setActors(actors);
     }
 

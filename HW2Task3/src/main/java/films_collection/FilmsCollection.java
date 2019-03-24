@@ -11,11 +11,13 @@ public class FilmsCollection implements Serializable {
         setTitle(title);
     }
 
-    public FilmsCollection(Film film) throws Exception{
+    public FilmsCollection(String title, Film film) throws Exception{
+        setTitle(title);
         setFilms(film);
     }
 
-    public FilmsCollection(HashSet<Film> films) throws Exception{
+    public FilmsCollection(String title, HashSet<Film> films) throws Exception{
+        setTitle(title);
         setFilms(films);
     }
 
