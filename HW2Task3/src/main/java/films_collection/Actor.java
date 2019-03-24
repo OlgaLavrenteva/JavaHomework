@@ -1,6 +1,7 @@
 package main.java.films_collection;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Actor{
     private String name;
@@ -52,11 +53,30 @@ public class Actor{
 
     @Override
     public String toString(){
-        StringBuilder actor = new StringBuilder("Actor name:");
+        StringBuilder actor = new StringBuilder("Actor name: ");
         actor.append(name);
-        actor.append(" Actor surname:");
-        actor.append(" Actor`s date of birth:");
+        actor.append(" Actor surname: ");
+        actor.append(surname);
+        actor.append(" Actor`s date of birth: ");
         actor.append(dateOfBirth);
         return actor.toString();
+    }
+
+    @Override
+    public boolean equals(Object someObject){
+        if(this==someObject){
+            return true;
+        }
+        if(!(someObject instanceof Actor)){
+            return false;
+        }
+        Actor otherActor=(Actor)someObject;
+        return Objects.equals(name,otherActor.name) && Objects.equals(surname,otherActor.surname) &&
+                Objects.equals(dateOfBirth,otherActor.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(name,surname,dateOfBirth);
     }
 }

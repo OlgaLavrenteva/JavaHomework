@@ -1,6 +1,7 @@
 package main.java.films_collection;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Film {
     private String title;
@@ -57,5 +58,35 @@ public class Film {
             film.append(actor.toString());
         }
         return film.toString();
+    }
+
+    @Override
+    public boolean equals(Object someObject){
+        if(this==someObject){
+            return true;
+        }
+        if(!(someObject instanceof Film)){
+            return false;
+        }
+        Film otherFilm=(Film)someObject;
+        if(Objects.equals(title,otherFilm.title) && actors.size()==otherFilm.actors.size()){
+            for(Actor actor: actors){
+                if(!otherFilm.actors.contains(actor)){
+                    return false;
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode(){
+        int filmHashCode = Objects.hashCode(title);
+        for(Actor actor: actors){
+            filmHashCode = filmHashCode + Objects.hashCode(actor);
+        }
+        return filmHashCode;
     }
 }
