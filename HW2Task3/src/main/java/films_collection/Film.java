@@ -21,7 +21,7 @@ public class Film implements Serializable {
 
     public Film(String title, HashSet<Actor> actors) throws Exception{
         setTitle(title);
-        actors = new HashSet<Actor>();
+        this.actors = new HashSet<Actor>();
         setActors(actors);
     }
 

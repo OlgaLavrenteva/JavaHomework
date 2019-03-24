@@ -20,7 +20,7 @@ public class FilmsCollection implements Serializable {
 
     public FilmsCollection(String title, HashSet<Film> films) throws Exception{
         setTitle(title);
-        films = new HashSet<Film>();
+        this.films = new HashSet<Film>();
         setFilms(films);
     }
 
@@ -69,7 +69,7 @@ public class FilmsCollection implements Serializable {
     public String toString(){
         StringBuilder collection = new StringBuilder("Films collection: ");
         collection.append(title);
-        collection.append("\nFilms:\n");
+        collection.append("\nFilms:");
         if(films!=null){
             for (Film film: films){
                 collection.append("\n");

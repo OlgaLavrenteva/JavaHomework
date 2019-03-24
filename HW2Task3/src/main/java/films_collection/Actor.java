@@ -7,14 +7,14 @@ import java.util.Objects;
 public class Actor implements Serializable {
     private String name;
     private String surname;
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     public Actor(String name, String surname) throws Exception{
         setName(name);
         setSurname(surname);
     }
 
-    public Actor(String name, String surname, Date dateOfBirth) throws Exception{
+    public Actor(String name, String surname, String dateOfBirth) throws Exception{
         this(name,surname);
         setDateOfBirth(dateOfBirth);
     }
@@ -33,7 +33,7 @@ public class Actor implements Serializable {
         this.surname=surname;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) throws Exception{
+    public void setDateOfBirth(String dateOfBirth) throws Exception{
         if(dateOfBirth==null){
             throw new Exception("Date of birth is null.");
         }
@@ -48,7 +48,7 @@ public class Actor implements Serializable {
         return surname;
     }
 
-    public Date getDateOfBirth(){
+    public String getDateOfBirth(){
         return dateOfBirth;
     }
 
