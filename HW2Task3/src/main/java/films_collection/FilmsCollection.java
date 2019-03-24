@@ -9,15 +9,18 @@ public class FilmsCollection implements Serializable {
 
     public FilmsCollection(String title) throws Exception{
         setTitle(title);
+        films = new HashSet<Film>();
     }
 
     public FilmsCollection(String title, Film film) throws Exception{
         setTitle(title);
+        films = new HashSet<Film>();
         setFilms(film);
     }
 
     public FilmsCollection(String title, HashSet<Film> films) throws Exception{
         setTitle(title);
+        films = new HashSet<Film>();
         setFilms(films);
     }
 
@@ -67,10 +70,15 @@ public class FilmsCollection implements Serializable {
         StringBuilder collection = new StringBuilder("Films collection: ");
         collection.append(title);
         collection.append("\nFilms:\n");
-        for (Film film: films){
-            collection.append("\n");
-            collection.append(film.toString());
+        if(films!=null){
+            for (Film film: films){
+                collection.append("\n");
+                collection.append(film.toString());
+            }
+        } else {
+            collection.append("No films are available");
         }
+
         return collection.toString();
     }
 }

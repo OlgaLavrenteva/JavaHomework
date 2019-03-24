@@ -10,15 +10,18 @@ public class Film implements Serializable {
 
     public Film(String title) throws Exception{
         setTitle(title);
+        actors = new HashSet<Actor>();
     }
 
     public Film(String title, Actor actor) throws Exception{
         setTitle(title);
+        actors = new HashSet<Actor>();
         setActors(actor);
     }
 
     public Film(String title, HashSet<Actor> actors) throws Exception{
         setTitle(title);
+        actors = new HashSet<Actor>();
         setActors(actors);
     }
 
@@ -68,10 +71,15 @@ public class Film implements Serializable {
         StringBuilder film = new StringBuilder("Film title: ");
         film.append(title);
         film.append("\nActors:");
-        for (Actor actor: actors){
-            film.append("\n");
-            film.append(actor.toString());
+        if(actors!=null){
+            for (Actor actor: actors){
+                film.append("\n");
+                film.append(actor.toString());
+            }
+        } else{
+            film.append("No actors available");
         }
+
         return film.toString();
     }
 
