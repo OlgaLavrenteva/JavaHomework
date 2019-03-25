@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class FilmTests {
@@ -70,6 +71,18 @@ public class FilmTests {
         HashSet<Actor> actors = new HashSet<Actor>();
         actors.add(actor2);
         assertEquals(actors,film.getActors());
+    }
+
+    @Test
+    public void setNullActor() throws Exception{
+        String title = "Film1";
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor = new Actor(name,surname);
+        Film film = new Film(title,actor);
+        Actor nullActor = null;
+        film.setActors(nullActor);
+        assertEquals(0,film.getActors().size());
     }
 
     @Test
