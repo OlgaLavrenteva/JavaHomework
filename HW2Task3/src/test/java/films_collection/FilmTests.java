@@ -25,7 +25,7 @@ public class FilmTests {
         String surname = "Surname1";
         Actor actor = new Actor(name,surname);
         Film film = new Film(title,actor);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor);
         assertEquals(title,film.getTitle());
         assertEquals(actors,film.getActors());
@@ -40,7 +40,7 @@ public class FilmTests {
         String name2 = "Name2";
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor1);
         actors.add(actor2);
         Film film = new Film(title,actors);
@@ -68,7 +68,7 @@ public class FilmTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         film.setActors(actor2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor2);
         assertEquals(actors,film.getActors());
     }
@@ -95,7 +95,7 @@ public class FilmTests {
         String name2 = "Name2";
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor1);
         actors.add(actor2);
         film.setActors(actors);
@@ -113,7 +113,7 @@ public class FilmTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         film.addActor(actor2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor1);
         actors.add(actor2);
         assertEquals(actors,film.getActors());
@@ -126,9 +126,9 @@ public class FilmTests {
         String surname1 = "Surname1";
         Actor actor1 = new Actor(name1,surname1);
         Film film = new Film(title,actor1);
-        Actor actor2 = null;
-        film.addActor(actor2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        Actor nullActor = null;
+        film.addActor(nullActor);
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor1);
         assertEquals(actors,film.getActors());
     }
@@ -145,7 +145,7 @@ public class FilmTests {
         Film film = new Film(title,actor1);
         film.addActor(actor2);
         film.removeActor(actor1);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor2);
         assertEquals(actors,film.getActors());
     }
@@ -159,7 +159,7 @@ public class FilmTests {
     }
 
     @Test
-    public void FilmWithTitleActors() throws Exception{
+    public void toStringFilmWithTitleActors() throws Exception{
         String title = "Film1";
         String name1 = "Name1";
         String surname1 = "Surname1";
@@ -167,7 +167,7 @@ public class FilmTests {
         String name2 = "Name2";
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
-        HashSet<Actor> actors = new HashSet<Actor>();
+        HashSet<Actor> actors = new HashSet<>();
         actors.add(actor1);
         actors.add(actor2);
         Film film = new Film(title,actors);
