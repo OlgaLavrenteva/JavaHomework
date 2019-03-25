@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Actor implements Serializable {
+public class Actor implements Serializable, Comparable<Actor> {
     private String name;
     private String surname;
     private String dateOfBirth;
@@ -76,5 +76,28 @@ public class Actor implements Serializable {
     @Override
     public int hashCode(){
         return Objects.hash(name,surname,dateOfBirth);
+    }
+
+    @Override
+    public int compareTo(Actor otherActor) throws NullPointerException{
+        if (otherActor==null){
+            throw new NullPointerException();
+        }
+        if (this==otherActor){
+            return 0;
+        }
+
+        if (surname.compareToIgnoreCase(otherActor.surname)!=0){
+            return surname.compareToIgnoreCase(otherActor.surname);
+        } else if (name.compareToIgnoreCase(otherActor.name)!=0){
+            return name.compareToIgnoreCase(otherActor.name);
+        } else if (dateOfBirth!=null && otherActor.dateOfBirth!=null && dateOfBirth.compareToIgnoreCase(otherActor.dateOfBirth)!=0){
+            return dateOfBirth.compareToIgnoreCase(otherActor.dateOfBirth);
+        } else if (dateOfBirth==null && otherActor.dateOfBirth==null){
+            return 0;
+        } else if (dateOfBirth==null || otherActor.dateOfBirth==null){
+            return (dateOfBirth==null) ? 1 : -1;
+        }
+        return 0;
     }
 }
