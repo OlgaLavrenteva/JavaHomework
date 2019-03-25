@@ -10,23 +10,45 @@ public class Film implements Serializable, Comparable<Film> {
     private String title;
     private HashSet<Actor> actors;
 
+    /**
+     * Constructor of Film with mandatory title parameter.
+     * @param title
+     * @throws Exception if title is null
+     */
     public Film(String title) throws Exception{
         setTitle(title);
         actors = new HashSet<>();
     }
 
+    /**
+     * Constructor of Film with mandatory title parameter and actor.
+     * @param title
+     * @param actor - object of Actor
+     * @throws Exception if title is null
+     */
     public Film(String title, Actor actor) throws Exception{
         setTitle(title);
         actors = new HashSet<>();
         setActors(actor);
     }
 
+    /**
+     * Constructor of Film with mandatory title parameter and actors.
+     * @param title
+     * @param actors - HashSet of Actor
+     * @throws Exception if title is null
+     */
     public Film(String title, HashSet<Actor> actors) throws Exception{
         setTitle(title);
         this.actors = new HashSet<>();
         setActors(actors);
     }
 
+    /**
+     * Setter method for mandatory field title.
+     * @param title
+     * @throws Exception if title is null
+     */
     public void setTitle(String title) throws Exception{
         if(title==null){
             throw new Exception("Film title is null.");
@@ -34,6 +56,10 @@ public class Film implements Serializable, Comparable<Film> {
         this.title=title;
     }
 
+    /**
+     * Setter method for actor.
+     * @param actor - object of Actor
+     */
     public void setActors(Actor actor){
         HashSet<Actor> updatedActors=new HashSet<>();
         if(actor!=null){
@@ -42,6 +68,10 @@ public class Film implements Serializable, Comparable<Film> {
         actors=updatedActors;
     }
 
+    /**
+     * Setter method for actors.
+     * @param actors - HashSet of Actor
+     */
     public void setActors(HashSet<Actor> actors){
         HashSet<Actor> updatedActors=new HashSet<>();
         if(actors!=null){
@@ -50,20 +80,36 @@ public class Film implements Serializable, Comparable<Film> {
         this.actors=updatedActors;
     }
 
+    /**
+     * Getter method for mandatory field title.
+     * @return
+     */
     public String getTitle(){
         return title;
     }
 
+    /**
+     * Getter method for actors.
+     * @return HashSet of Actor
+     */
     public HashSet<Actor> getActors(){
         return actors;
     }
 
+    /**
+     * The method allows to add a new actor to existing HashSet
+     * @param actor
+     */
     public void addActor(Actor actor){
         if(actor!=null){
             actors.add(actor);
         }
     }
 
+    /**
+     * The method allows to remove the actor from existing HashSet
+     * @param actor
+     */
     public void removeActor(Actor actor){
         actors.remove(actor);
     }
@@ -86,6 +132,12 @@ public class Film implements Serializable, Comparable<Film> {
         return film.toString();
     }
 
+    /**
+     * equals method returns true only when values of title and actors of one film are equal to title and actors
+     * of another actor.
+     * @param someObject
+     * @return
+     */
     @Override
     public boolean equals(Object someObject){
         if(this==someObject){

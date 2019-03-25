@@ -9,16 +9,34 @@ public class Actor implements Serializable, Comparable<Actor> {
     private String surname;
     private String dateOfBirth;
 
+    /**
+     * Constructor of Actor with two mandatory parameters.
+     * @param name
+     * @param surname
+     * @throws Exception if name or surname is null
+     */
     public Actor(String name, String surname) throws Exception{
         setName(name);
         setSurname(surname);
     }
 
+    /**
+     * Constructor of Actor with two mandatory parameters(name and surname) and dateOfBirth.
+     * @param name
+     * @param surname
+     * @param dateOfBirth
+     * @throws Exception if name or surname is null
+     */
     public Actor(String name, String surname, String dateOfBirth) throws Exception{
         this(name,surname);
         setDateOfBirth(dateOfBirth);
     }
 
+    /**
+     * Setter method for mandatory field name.
+     * @param name
+     * @throws Exception if name is null
+     */
     public void setName(String name) throws Exception{
         if(name==null){
             throw new Exception("Name is null.");
@@ -26,6 +44,11 @@ public class Actor implements Serializable, Comparable<Actor> {
         this.name=name;
     }
 
+    /**
+     * Setter method for mandatory field surname.
+     * @param surname
+     * @throws Exception if surname is null
+     */
     public void setSurname(String surname) throws Exception{
         if(surname==null){
             throw new Exception("Surname is null.");
@@ -33,18 +56,34 @@ public class Actor implements Serializable, Comparable<Actor> {
         this.surname=surname;
     }
 
+    /**
+     * Setter method for dateOfBirth field.
+     * @param dateOfBirth
+     */
     public void setDateOfBirth(String dateOfBirth){
         this.dateOfBirth=dateOfBirth;
     }
 
+    /**
+     * Getter method for name field.
+     * @return
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * Getter method for surname field.
+     * @return
+     */
     public String getSurname(){
         return surname;
     }
 
+    /**
+     * Getter method for dateOfBirth field.
+     * @return
+     */
     public String getDateOfBirth(){
         return dateOfBirth;
     }
@@ -60,6 +99,12 @@ public class Actor implements Serializable, Comparable<Actor> {
         return actor.toString();
     }
 
+    /**
+     * equals method returns true only when values of all fields of one actor are equal to values of appropriate fields
+     * of another actor.
+     * @param someObject
+     * @return
+     */
     @Override
     public boolean equals(Object someObject){
         if(this==someObject){
