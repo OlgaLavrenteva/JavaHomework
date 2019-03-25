@@ -32,19 +32,15 @@ public class Film implements Serializable {
         this.title=title;
     }
 
-    public void setActors(Actor actor) throws Exception{
-        if(actor==null){
-            throw new Exception("Actor is null.");
+    public void setActors(Actor actor){
+        HashSet<Actor> updatedActors = new HashSet<Actor>();
+        if(actor!=null){
+            updatedActors.add(actor);
         }
-        HashSet<Actor> changedActors = new HashSet<Actor>();
-        changedActors.add(actor);
-        actors=changedActors;
+        actors=updatedActors;
     }
 
-    public void setActors(HashSet<Actor> actors) throws Exception{
-        if(actors==null){
-            throw new Exception("Actors are null.");
-        }
+    public void setActors(HashSet<Actor> actors){
         this.actors=actors;
     }
 
