@@ -31,19 +31,15 @@ public class FilmsCollection implements Serializable {
         this.title=title;
     }
 
-    public void setFilms(Film film) throws Exception{
-        if(film==null){
-            throw new Exception("Film is null");
-        }
+    public void setFilms(Film film){
         HashSet<Film> changedFilms = new HashSet<Film>();
-        changedFilms.add(film);
+        if(film!=null){
+            changedFilms.add(film);
+        }
         this.films=changedFilms;
     }
 
-    public void setFilms(HashSet<Film> films) throws Exception{
-        if(films==null){
-            throw new Exception("Films are null.");
-        }
+    public void setFilms(HashSet<Film> films){
         this.films=films;
     }
 
