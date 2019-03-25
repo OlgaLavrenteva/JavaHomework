@@ -33,7 +33,7 @@ public class Film implements Serializable {
     }
 
     public void setActors(Actor actor){
-        HashSet<Actor> updatedActors = new HashSet<Actor>();
+        HashSet<Actor> updatedActors=new HashSet<Actor>();
         if(actor!=null){
             updatedActors.add(actor);
         }
@@ -41,7 +41,11 @@ public class Film implements Serializable {
     }
 
     public void setActors(HashSet<Actor> actors){
-        this.actors=actors;
+        HashSet<Actor> updatedActors=new HashSet<Actor>();
+        if(actors!=null){
+            updatedActors=actors;
+        }
+        this.actors=updatedActors;
     }
 
     public String getTitle(){
@@ -67,13 +71,13 @@ public class Film implements Serializable {
         StringBuilder film = new StringBuilder("Film title: ");
         film.append(title);
         film.append("\nActors:");
-        if(actors!=null){
+        if(actors.size()!=0){
             for (Actor actor: actors){
                 film.append("\n");
                 film.append(actor.toString());
             }
         } else{
-            film.append("No actors available");
+            film.append(" No actors available");
         }
 
         return film.toString();
