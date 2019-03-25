@@ -117,6 +117,7 @@ public class ActorTests {
         Actor actor1 = new Actor(name,surname,dateOfBirth);
         Actor actor2 = new Actor(name,surname,dateOfBirth);
         assertTrue(actor1.equals(actor2));
+        assertTrue(actor2.equals(actor1));
     }
 
     @Test
@@ -127,6 +128,7 @@ public class ActorTests {
         Actor actor1 = new Actor(name,surname,dateOfBirth);
         Actor actor2 = new Actor(name,surname);
         assertTrue(!actor1.equals(actor2));
+        assertTrue(!actor2.equals(actor1));
     }
 
     @Test
