@@ -162,6 +162,83 @@ public class ActorTests {
     }
 
     @Test
+    public void compareToDifSurnames() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        Actor actor1 = new Actor(name1,surname1);
+        String name2 = "Name1";
+        String surname2 = "Surname2";
+        Actor actor2 = new Actor(name2,surname2);
+        assertTrue(actor1.compareTo(actor2)<0);
+        assertTrue(actor2.compareTo(actor1)>0);
+    }
+
+    @Test
+    public void compareToSameSurnamesDifNames() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        Actor actor1 = new Actor(name1,surname1);
+        String name2 = "Name2";
+        String surname2 = "Surname1";
+        Actor actor2 = new Actor(name2,surname2);
+        assertTrue(actor1.compareTo(actor2)<0);
+        assertTrue(actor2.compareTo(actor1)>0);
+    }
+
+    @Test
+    public void compareToSameSurnamesNamesDifDates() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        String dateOfBirth1 = "1970";
+        Actor actor1 = new Actor(name1,surname1,dateOfBirth1);
+        String name2 = "Name1";
+        String surname2 = "Surname1";
+        String dateOfBirth2 = "1980";
+        Actor actor2 = new Actor(name2,surname2,dateOfBirth2);
+        assertTrue(actor1.compareTo(actor2)<0);
+        assertTrue(actor2.compareTo(actor1)>0);
+    }
+
+    @Test
+    public void compareToSameSurnamesNamesDates() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        String dateOfBirth1 = "1970";
+        Actor actor1 = new Actor(name1,surname1,dateOfBirth1);
+        String name2 = "Name1";
+        String surname2 = "Surname1";
+        String dateOfBirth2 = "1970";
+        Actor actor2 = new Actor(name2,surname2,dateOfBirth2);
+        assertTrue(actor1.compareTo(actor2)==0);
+        assertTrue(actor2.compareTo(actor1)==0);
+    }
+
+    @Test
+    public void compareToSameSurnamesNamesNullDates() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        Actor actor1 = new Actor(name1,surname1);
+        String name2 = "Name1";
+        String surname2 = "Surname1";
+        Actor actor2 = new Actor(name2,surname2);
+        assertTrue(actor1.compareTo(actor2)==0);
+        assertTrue(actor2.compareTo(actor1)==0);
+    }
+
+    @Test
+    public void compareToSameSurnamesNamesNullOneDate() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        String dateOfBirth1 = "1970";
+        Actor actor1 = new Actor(name1,surname1,dateOfBirth1);
+        String name2 = "Name1";
+        String surname2 = "Surname1";
+        Actor actor2 = new Actor(name2,surname2);
+        assertTrue(actor1.compareTo(actor2)<0);
+        assertTrue(actor2.compareTo(actor1)>0);
+    }
+
+    @Test
     public void createActorWithInvalidName(){
         try {
             String invalidName = null;
@@ -212,5 +289,15 @@ public class ActorTests {
             String expectedExceptionMessage = "Surname is null.";
             assertEquals(expectedExceptionMessage,e.getMessage());
         }
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void compareToNullActor() throws Exception{
+        String name1 = "Name1";
+        String surname1 = "Surname1";
+        String dateOfBirth1 = "1970";
+        Actor actor1 = new Actor(name1,surname1,dateOfBirth1);
+        Actor actor2 = null;
+        actor1.compareTo(actor2);
     }
 }
