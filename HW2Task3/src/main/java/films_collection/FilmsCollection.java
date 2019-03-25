@@ -9,18 +9,18 @@ public class FilmsCollection implements Serializable {
 
     public FilmsCollection(String title) throws Exception{
         setTitle(title);
-        films = new HashSet<Film>();
+        films = new HashSet<>();
     }
 
     public FilmsCollection(String title, Film film) throws Exception{
         setTitle(title);
-        films = new HashSet<Film>();
+        films = new HashSet<>();
         setFilms(film);
     }
 
     public FilmsCollection(String title, HashSet<Film> films) throws Exception{
         setTitle(title);
-        this.films = new HashSet<Film>();
+        this.films = new HashSet<>();
         setFilms(films);
     }
 
@@ -32,7 +32,7 @@ public class FilmsCollection implements Serializable {
     }
 
     public void setFilms(Film film){
-        HashSet<Film> changedFilms = new HashSet<Film>();
+        HashSet<Film> changedFilms = new HashSet<>();
         if(film!=null){
             changedFilms.add(film);
         }
@@ -40,7 +40,11 @@ public class FilmsCollection implements Serializable {
     }
 
     public void setFilms(HashSet<Film> films){
-        this.films=films;
+        HashSet<Film> changedFilms = new HashSet<>();
+        if(films!=null){
+            changedFilms=films;
+        }
+        this.films=changedFilms;
     }
 
     public String getTitle(){
@@ -66,13 +70,13 @@ public class FilmsCollection implements Serializable {
         StringBuilder collection = new StringBuilder("Films collection: ");
         collection.append(title);
         collection.append("\nFilms:");
-        if(films!=null){
+        if(films.size()!=0){
             for (Film film: films){
                 collection.append("\n");
                 collection.append(film.toString());
             }
         } else {
-            collection.append("No films are available");
+            collection.append(" No films are available");
         }
 
         return collection.toString();

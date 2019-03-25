@@ -33,10 +33,7 @@ public class Actor implements Serializable {
         this.surname=surname;
     }
 
-    public void setDateOfBirth(String dateOfBirth) throws Exception{
-        if(dateOfBirth==null){
-            throw new Exception("Date of birth is null.");
-        }
+    public void setDateOfBirth(String dateOfBirth){
         this.dateOfBirth=dateOfBirth;
     }
 
