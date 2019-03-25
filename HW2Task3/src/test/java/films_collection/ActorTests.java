@@ -226,6 +226,15 @@ public class ActorTests {
     }
 
     @Test
+    public void compareToSameActor() throws Exception{
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor = new Actor(name,surname);
+        assertTrue(actor.compareTo(actor)==0);
+        assertTrue(actor.compareTo(actor)==0);
+    }
+
+    @Test
     public void compareToSameSurnamesNamesNullOneDate() throws Exception{
         String name1 = "Name1";
         String surname1 = "Surname1";

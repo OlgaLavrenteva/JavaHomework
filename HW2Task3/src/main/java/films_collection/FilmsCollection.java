@@ -2,6 +2,7 @@ package main.java.films_collection;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class FilmsCollection implements Serializable {
     private String title;
@@ -71,7 +72,8 @@ public class FilmsCollection implements Serializable {
         collection.append(title);
         collection.append("\nFilms:");
         if(films.size()!=0){
-            for (Film film: films){
+            TreeSet<Film> filmsSorted = new TreeSet<>(films);
+            for (Film film: filmsSorted){
                 collection.append("\n");
                 collection.append(film.toString());
             }
