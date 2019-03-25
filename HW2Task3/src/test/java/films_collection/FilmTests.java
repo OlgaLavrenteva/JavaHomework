@@ -258,6 +258,77 @@ public class FilmTests {
     }
 
     @Test
+    public void compareToDifTitles() throws Exception{
+        String title1 = "Film1";
+        Film film1 = new Film(title1);
+        String title2 = "Film2";
+        Film film2 = new Film(title2);
+        assertTrue(film1.compareTo(film2)<0);
+        assertTrue(film2.compareTo(film1)>0);
+    }
+
+    @Test
+    public void compareToSameTitlesDifActors() throws Exception{
+        String title = "Film1";
+        String name1 = "Name1";
+        String name2 = "Name2";
+        String surname = "Surname1";
+        Actor actor1 = new Actor(name1,surname);
+        Actor actor2 = new Actor(name2,surname);
+        Film film1 = new Film(title,actor1);
+        Film film2 = new Film(title,actor2);
+        assertTrue(film1.compareTo(film2)<0);
+        assertTrue(film2.compareTo(film1)>0);
+    }
+
+    @Test
+    public void compareToSameTitlesActors() throws Exception{
+        String title = "Film1";
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor1 = new Actor(name,surname);
+        Actor actor2 = new Actor(name,surname);
+        Film film1 = new Film(title,actor1);
+        Film film2 = new Film(title,actor2);
+        assertTrue(film1.compareTo(film2)==0);
+        assertTrue(film2.compareTo(film1)==0);
+    }
+
+    @Test
+    public void compareToSameTitlesNullActors() throws Exception{
+        String title = "Film1";
+        Actor actor1 = null;
+        Actor actor2 = null;
+        Film film1 = new Film(title,actor1);
+        Film film2 = new Film(title,actor2);
+        assertTrue(film1.compareTo(film2)==0);
+        assertTrue(film2.compareTo(film1)==0);
+    }
+
+    @Test
+    public void compareToSameFilm() throws Exception{
+        String title = "Film1";
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor = new Actor(name,surname);
+        Film film = new Film(title,actor);
+        assertTrue(film.compareTo(film)==0);
+    }
+
+    @Test
+    public void compareToSameTitlesNullOneActor() throws Exception{
+        String title = "Film1";
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor1 = new Actor(name,surname);
+        Actor actor2 = null;
+        Film film1 = new Film(title,actor1);
+        Film film2 = new Film(title,actor2);
+        assertTrue(film1.compareTo(film2)<0);
+        assertTrue(film2.compareTo(film1)>0);
+    }
+
+    @Test
     public void createFilmWithInvalidTitle(){
         try {
             String invalidTitle = null;
@@ -279,5 +350,13 @@ public class FilmTests {
             String expectedExceptionMessage = "Film title is null.";
             assertEquals(expectedExceptionMessage,e.getMessage());
         }
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void compareToNullFilm() throws Exception{
+        String title = "Film1";
+        Film film1 = new Film(title);
+        Film film2 = null;
+        film1.compareTo(film2);
     }
 }

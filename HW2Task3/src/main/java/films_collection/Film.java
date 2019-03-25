@@ -135,10 +135,12 @@ public class Film implements Serializable, Comparable<Film> {
             TreeSet<Actor> otherActorsSorted = new TreeSet<>(otherFilm.actors);
             Iterator<Actor> itrOtherActor = otherActorsSorted.iterator();
             while(itrActor.hasNext()){
-                if(itrActor.next()!=itrOtherActor.next()){
-                    return itrActor.next().compareTo(itrOtherActor.next());
+                int compare = itrActor.next().compareTo(itrOtherActor.next());
+                if(compare!=0){
+                    return compare;
                 }
             }
+            return 0;
         } else if (actors==null && otherFilm.actors==null){
             return 0;
         } else if (actors==null || otherFilm.actors==null){
