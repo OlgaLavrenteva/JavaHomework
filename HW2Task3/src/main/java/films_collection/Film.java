@@ -10,9 +10,9 @@ public class Film implements Serializable, Comparable<Film> {
     /**
      * Constructor of Film with mandatory title parameter.
      * @param title
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public Film(String title) throws Exception{
+    public Film(String title) throws IllegalArgumentException{
         setTitle(title);
         actors = new HashSet<>();
     }
@@ -21,9 +21,9 @@ public class Film implements Serializable, Comparable<Film> {
      * Constructor of Film with mandatory title parameter and actor.
      * @param title
      * @param actor - object of Actor
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public Film(String title, Actor actor) throws Exception{
+    public Film(String title, Actor actor) throws IllegalArgumentException{
         setTitle(title);
         actors = new HashSet<>();
         setActors(actor);
@@ -33,9 +33,9 @@ public class Film implements Serializable, Comparable<Film> {
      * Constructor of Film with mandatory title parameter and actors.
      * @param title
      * @param actors - HashSet of Actor
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public Film(String title, Set<Actor> actors) throws Exception{
+    public Film(String title, Set<Actor> actors) throws IllegalArgumentException{
         setTitle(title);
         this.actors = new HashSet<>();
         setActors(actors);
@@ -44,11 +44,11 @@ public class Film implements Serializable, Comparable<Film> {
     /**
      * Setter method for mandatory field title.
      * @param title
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public void setTitle(String title) throws Exception{
+    public void setTitle(String title) throws IllegalArgumentException{
         if(title==null){
-            throw new Exception("Film title is null.");
+            throw new IllegalArgumentException("Film title is null.");
         }
         this.title=title;
     }
@@ -137,6 +137,9 @@ public class Film implements Serializable, Comparable<Film> {
      */
     @Override
     public boolean equals(Object someObject){
+        if(someObject==null){
+            return false;
+        }
         if(this==someObject){
             return true;
         }

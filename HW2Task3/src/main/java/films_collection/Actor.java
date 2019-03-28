@@ -12,9 +12,9 @@ public class Actor implements Serializable, Comparable<Actor> {
      * Constructor of Actor with two mandatory parameters.
      * @param name
      * @param surname
-     * @throws Exception if name or surname is null
+     * @throws IllegalArgumentException if name or surname is null
      */
-    public Actor(String name, String surname) throws Exception{
+    public Actor(String name, String surname) throws IllegalArgumentException{
         setName(name);
         setSurname(surname);
     }
@@ -24,9 +24,9 @@ public class Actor implements Serializable, Comparable<Actor> {
      * @param name
      * @param surname
      * @param dateOfBirth
-     * @throws Exception if name or surname is null
+     * @throws IllegalArgumentException if name or surname is null
      */
-    public Actor(String name, String surname, String dateOfBirth) throws Exception{
+    public Actor(String name, String surname, String dateOfBirth) throws IllegalArgumentException{
         this(name,surname);
         setDateOfBirth(dateOfBirth);
     }
@@ -34,11 +34,11 @@ public class Actor implements Serializable, Comparable<Actor> {
     /**
      * Setter method for mandatory field name.
      * @param name
-     * @throws Exception if name is null
+     * @throws IllegalArgumentException if name is null
      */
-    public void setName(String name) throws Exception{
+    public void setName(String name) throws IllegalArgumentException{
         if(name==null){
-            throw new Exception("Name is null.");
+            throw new IllegalArgumentException("Name is null.");
         }
         this.name=name;
     }
@@ -46,11 +46,11 @@ public class Actor implements Serializable, Comparable<Actor> {
     /**
      * Setter method for mandatory field surname.
      * @param surname
-     * @throws Exception if surname is null
+     * @throws IllegalArgumentException if surname is null
      */
-    public void setSurname(String surname) throws Exception{
+    public void setSurname(String surname) throws IllegalArgumentException{
         if(surname==null){
-            throw new Exception("Surname is null.");
+            throw new IllegalArgumentException("Surname is null.");
         }
         this.surname=surname;
     }
@@ -106,6 +106,9 @@ public class Actor implements Serializable, Comparable<Actor> {
      */
     @Override
     public boolean equals(Object someObject){
+        if(someObject==null){
+            return false;
+        }
         if(this==someObject){
             return true;
         }

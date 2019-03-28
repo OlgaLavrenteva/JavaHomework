@@ -14,6 +14,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class FilmTests {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void createFilmWithTitle() throws Exception{
         String title = "Film1";
@@ -238,6 +241,14 @@ public class FilmTests {
     }
 
     @Test
+    public void equalsFilmsNullOtherObject() throws Exception{
+        String title = "Film1";
+        Film film1 = new Film(title);
+        Film film2 = null;
+        assertTrue(!film1.equals(film2));
+    }
+
+    @Test
     public void hashCodeEqualFilms() throws Exception{
         String title = "Film1";
         String name = "Name1";
@@ -331,30 +342,30 @@ public class FilmTests {
         assertTrue(film2.compareTo(film1)>0);
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test(expected = Exception.class)
-    public void createFilmWithInvalidTitle() throws Exception{
+    @Test
+    public void createFilmWithInvalidTitle(){
         String invalidTitle = null;
-        Film film = new Film(invalidTitle);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Film title is null.");
+        Film film = new Film(invalidTitle);
     }
 
-    @Test(expected = Exception.class)
-    public void setInvalidTitle() throws Exception{
+    @Test
+    public void setInvalidTitle(){
         String title = "Film1";
         Film film = new Film(title);
         String invalidTitle = null;
-        film.setTitle(invalidTitle);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Film title is null.");
+        film.setTitle(invalidTitle);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void compareToNullFilm() throws Exception{
+    @Test
+    public void compareToNullFilm(){
         String title = "Film1";
         Film film1 = new Film(title);
         Film film2 = null;
+        thrown.expect(NullPointerException.class);
         film1.compareTo(film2);
     }
 }

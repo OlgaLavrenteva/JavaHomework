@@ -22,7 +22,7 @@ public class FilmsCollectionManager {
             objOutStream.writeObject(filmsCollection);
             objOutStream.flush();
         } catch (IOException e){
-            throw new Exception(file + " doesn't exist.");
+            System.out.println(e.getMessage());
         }
 
         return file;
@@ -44,7 +44,7 @@ public class FilmsCollectionManager {
         try(ObjectInputStream objInStream = new ObjectInputStream(new FileInputStream(file))){
             filmsCollection = (FilmsCollection)objInStream.readObject();
         } catch (IOException e){
-            throw new Exception(file + " doesn't exist.");
+            throw new IOException(file + " doesn't exist.");
         }
 
         return filmsCollection;

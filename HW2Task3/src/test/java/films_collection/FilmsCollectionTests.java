@@ -14,6 +14,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class FilmsCollectionTests {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void createFilmsCollectionWithTitle() throws Exception{
         String title = "Collection1";
@@ -209,23 +212,22 @@ public class FilmsCollectionTests {
         assertEquals(expectedFilmsCollectionString,collection.toString());
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test(expected = Exception.class)
-    public void createFilmsCollectionWithInvalidTitle() throws Exception{
+    @Test
+    public void createFilmsCollectionWithInvalidTitle(){
         String invalidTitle = null;
-        FilmsCollection collection = new FilmsCollection(invalidTitle);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Collection title is null.");
+        FilmsCollection collection = new FilmsCollection(invalidTitle);
     }
 
-    @Test(expected = Exception.class)
-    public void setInvalidTitle() throws Exception{
+    @Test
+    public void setInvalidTitle(){
         String title = "Collection1";
         FilmsCollection collection = new FilmsCollection(title);
         String invalidTitle = null;
-        collection.setTitle(invalidTitle);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Collection title is null.");
+        collection.setTitle(invalidTitle);
     }
 
 }

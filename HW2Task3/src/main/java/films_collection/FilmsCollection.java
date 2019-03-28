@@ -12,9 +12,9 @@ public class FilmsCollection implements Serializable {
     /**
      * Constructor of FilmsCollection with mandatory title parameter.
      * @param title
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public FilmsCollection(String title) throws Exception{
+    public FilmsCollection(String title) throws IllegalArgumentException{
         setTitle(title);
         films = new HashSet<>();
     }
@@ -23,9 +23,9 @@ public class FilmsCollection implements Serializable {
      * Constructor of FilmsCollection with mandatory title parameter and film.
      * @param title
      * @param film - object of Film
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public FilmsCollection(String title, Film film) throws Exception{
+    public FilmsCollection(String title, Film film) throws IllegalArgumentException{
         setTitle(title);
         films = new HashSet<>();
         setFilms(film);
@@ -35,9 +35,9 @@ public class FilmsCollection implements Serializable {
      * onstructor of FilmsCollection with mandatory title parameter and films.
      * @param title
      * @param films - HashSet of Film
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public FilmsCollection(String title, Set<Film> films) throws Exception{
+    public FilmsCollection(String title, Set<Film> films) throws IllegalArgumentException{
         setTitle(title);
         this.films = new HashSet<>();
         setFilms(films);
@@ -46,11 +46,11 @@ public class FilmsCollection implements Serializable {
     /**
      * Setter method for mandatory field title.
      * @param title
-     * @throws Exception if title is null
+     * @throws IllegalArgumentException if title is null
      */
-    public void setTitle(String title) throws Exception{
+    public void setTitle(String title) throws IllegalArgumentException{
         if(title==null){
-            throw new Exception("Collection title is null.");
+            throw new IllegalArgumentException("Collection title is null.");
         }
         this.title=title;
     }

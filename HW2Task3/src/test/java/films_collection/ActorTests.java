@@ -10,6 +10,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class ActorTests {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void createActorWithNameSurname() throws Exception{
         String name = "Name1";
@@ -143,6 +146,16 @@ public class ActorTests {
     }
 
     @Test
+    public void equalsActorsNullOtherObject() throws Exception{
+        String name = "Name1";
+        String surname = "Surname1";
+        String dateOfBirth = "End of 1970";
+        Actor actor1 = new Actor(name,surname,dateOfBirth);
+        Actor actor2 = null;
+        assertTrue(!actor1.equals(actor2));
+    }
+
+    @Test
     public void hashCodeEqualActors() throws Exception{
         String name = "Name1";
         String surname = "Surname1";
@@ -249,52 +262,54 @@ public class ActorTests {
         assertTrue(actor2.compareTo(actor1)>0);
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test(expected = Exception.class)
-    public void createActorWithInvalidName() throws Exception{
+    @Test
+    public void createActorWithInvalidName(){
         String invalidName = null;
         String surname = "Surname1";
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Name is null.");
         Actor actor = new Actor(invalidName,surname);
-        thrown.expectMessage("Name is null.");
     }
 
-    @Test(expected = Exception.class)
-    public void createActorWithInvalidSurname() throws Exception{
+    @Test
+    public void createActorWithInvalidSurname(){
         String name = "Name1";
         String invalidSurname = null;
-        Actor actor = new Actor(name,invalidSurname);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Surname is null.");
+        Actor actor = new Actor(name,invalidSurname);
     }
 
-    @Test(expected = Exception.class)
-    public void setInvalidActorName() throws Exception{
+    @Test
+    public void setInvalidActorName(){
         String name = "Name1";
         String surname = "Surname1";
         Actor actor = new Actor(name,surname);
         String invalidName = null;
-        actor.setName(invalidName);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Name is null.");
+        actor.setName(invalidName);
     }
 
-    @Test(expected = Exception.class)
-    public void setInvalidActorSurname() throws Exception{
+    @Test
+    public void setInvalidActorSurname(){
         String name = "Name1";
         String surname = "Surname1";
         Actor actor = new Actor(name,surname);
         String invalidSurname = null;
-        actor.setSurname(invalidSurname);
+        thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Surname is null.");
+        actor.setSurname(invalidSurname);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void compareToNullActor() throws Exception{
+    @Test
+    public void compareToNullActor(){
         String name1 = "Name1";
         String surname1 = "Surname1";
         String dateOfBirth1 = "1970";
         Actor actor1 = new Actor(name1,surname1,dateOfBirth1);
         Actor actor2 = null;
+        thrown.expect(NullPointerException.class);
         actor1.compareTo(actor2);
     }
 }

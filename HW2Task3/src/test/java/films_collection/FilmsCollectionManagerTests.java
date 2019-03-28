@@ -15,6 +15,9 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 public class FilmsCollectionManagerTests {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void storeCollection() throws Exception{
         String title = "Collection1";
@@ -62,55 +65,40 @@ public class FilmsCollectionManagerTests {
         assertEquals(collection.toString(),collectionRestored.toString());
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test(expected = Exception.class)
+    @Test
     public void storeNullCollection() throws Exception{
         FilmsCollection collection = null;
         String currentDir = System.getProperty("user.dir");
         String collectionStore = currentDir + "\\out\\Collection.txt";
-        FilmsCollectionManager.storeCollection(collection, collectionStore);
+        thrown.expect(Exception.class);
         thrown.expectMessage("Films collection is null.");
+        FilmsCollectionManager.storeCollection(collection, collectionStore);
     }
 
-    @Test(expected = Exception.class)
+    @Test
     public void storeNullFile() throws Exception{
         String title = "Collection1";
         FilmsCollection collection = new FilmsCollection(title);
         String collectionStore = null;
-        FilmsCollectionManager.storeCollection(collection, collectionStore);
+        thrown.expect(Exception.class);
         thrown.expectMessage("File is null");
+        FilmsCollectionManager.storeCollection(collection, collectionStore);
     }
 
     @Test
-    public void storeFileDoesNotExist(){
-        try {
-            String title = "Collection1";
-            FilmsCollection collection = new FilmsCollection(title);
-            String collectionStore = "DoesNotExist";
-            FilmsCollectionManager.storeCollection(collection, collectionStore);
-        } catch (Exception e){
-            thrown.expect(IOException.class);
-            thrown.expectMessage("DoesNotExist doesn't exist.");
-        }
-    }
-
-    @Test(expected = Exception.class)
     public void restoreNullFile() throws Exception{
         String collectionStore = null;
-        FilmsCollectionManager.restoreCollection(collectionStore);
+        thrown.expect(Exception.class);
         thrown.expectMessage("File is null");
+        FilmsCollectionManager.restoreCollection(collectionStore);
     }
 
     @Test
-    public void restoreFileDoesNotExist(){
-        try {
-            String collectionStore = "DoesNotExist";
-            FilmsCollectionManager.restoreCollection(collectionStore);
-        } catch (Exception e){
-            thrown.expect(IOException.class);
-            thrown.expectMessage("DoesNotExist doesn't exist.");
-        }
+    public void restoreFileDoesNotExist() throws Exception{
+        String collectionStore = "DoesNotExist";
+        thrown.expect(IOException.class);
+        thrown.expectMessage("DoesNotExist doesn't exist.");
+        FilmsCollectionManager.restoreCollection(collectionStore);
+
     }
 }
