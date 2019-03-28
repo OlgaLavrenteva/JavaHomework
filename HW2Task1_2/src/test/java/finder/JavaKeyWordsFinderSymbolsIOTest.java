@@ -47,7 +47,7 @@ public class JavaKeyWordsFinderSymbolsIOTest {
                 "assert: 1 class: 1 break: 1 volatile: 1 abstract: 1 int: 1 instanceof: 1 super: 1 boolean: 1 throw: 1 " +
                 "char: 1 short: 1 return: 1";
 
-        assertEquals(input.toString().trim(),expectedOutputFileContent);
+        assertEquals(expectedOutputFileContent,input.toString().trim());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class JavaKeyWordsFinderSymbolsIOTest {
         String expectedOutputFileContent = "101 new: 11 private: 9 package: 1 static: 2 void: 7 import: 1 for: 4 " +
                 "this: 5 int: 14 public: 11 else: 4 final: 2 if: 16 class: 5 return: 9";
 
-        assertEquals(input.toString().trim(),expectedOutputFileContent);
+        assertEquals(expectedOutputFileContent,input.toString().trim());
     }
 
     @Test
@@ -100,7 +100,7 @@ public class JavaKeyWordsFinderSymbolsIOTest {
 
         String expectedOutputFileContent = "0";
 
-        assertEquals(input.toString().trim(),expectedOutputFileContent);
+        assertEquals(expectedOutputFileContent,input.toString().trim());
     }
 
     @Test
