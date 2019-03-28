@@ -104,26 +104,11 @@ public class JavaKeyWordsFinderSymbolsIOTest {
     }
 
     @Test
-    public void inputFileDoesNotExist(){
+    public void inputFileDoesNotExist() throws Exception{
         String inputFile = "NotExistingFile";
-        try {
-            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            thrown.expect(IOException.class);
-            thrown.expectMessage("NotExistingFile doesn't exist.");
-        }
-    }
-
-    @Test
-    public void outputFileDoesNotExist(){
-        String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
-        outputFile = "NotExistingFile";
-        try {
-            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            thrown.expect(IOException.class);
-            thrown.expectMessage("NotExistingFile doesn't exist.");
-        }
+        thrown.expect(IOException.class);
+        thrown.expectMessage("NotExistingFile doesn't exist.");
+        JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
     }
 
     @Test(expected = Exception.class)

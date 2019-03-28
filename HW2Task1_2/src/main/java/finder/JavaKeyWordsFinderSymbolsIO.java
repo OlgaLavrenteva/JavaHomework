@@ -40,7 +40,7 @@ public class JavaKeyWordsFinderSymbolsIO {
             bufWriter.write(foundMatches);
             bufWriter.flush();
         } catch (IOException e){
-            throw new IOException(inputFile + " doesn't exist.");
+            System.out.println(e.getMessage());
         }
     }
 }

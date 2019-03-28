@@ -46,7 +46,7 @@ public class JavaKeyWordsFinderBytesIO {
             outputFileBytes.write(outputBytes);
             outputFileBytes.flush();
         } catch (IOException e){
-            throw new IOException(outputFile + " doesn't exist.");
+            System.out.println(e.getMessage());
         }
     }
 }

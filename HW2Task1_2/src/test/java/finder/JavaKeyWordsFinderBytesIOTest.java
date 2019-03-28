@@ -104,26 +104,12 @@ public class JavaKeyWordsFinderBytesIOTest {
     }
 
     @Test
-    public void inputFileDoesNotExist(){
+    public void inputFileDoesNotExist() throws Exception{
         String inputFile = "NotExistingFile";
-        try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            thrown.expect(IOException.class);
-            thrown.expectMessage("NotExistingFile doesn't exist.");
-        }
-    }
+        thrown.expect(IOException.class);
+        thrown.expectMessage("NotExistingFile doesn't exist.");
+        JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
 
-    @Test
-    public void outputFileDoesNotExist(){
-        String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
-        outputFile = "NotExistingFile";
-        try {
-            JavaKeyWordsFinderBytesIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            thrown.expect(IOException.class);
-            thrown.expectMessage("NotExistingFile doesn't exist.");
-        }
     }
 
     @Test(expected = Exception.class)
