@@ -16,6 +16,9 @@ public class JavaKeyWordsFinderSymbolsIOTest {
     String currentDir = System.getProperty("user.dir");
     String outputFile = currentDir + "\\out\\jkw_result.txt";
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void inputFileFullyMatchesJavaKeyWords(){
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\FileForAnalyzingAllJKW.java";
@@ -99,9 +102,6 @@ public class JavaKeyWordsFinderSymbolsIOTest {
 
         assertEquals(input.toString().trim(),expectedOutputFileContent);
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void inputFileDoesNotExist(){

@@ -10,6 +10,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class KeyWordsFinderTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void validKeyWordsFinderCreation() throws Exception{
         String notNullString = "for if";
@@ -68,9 +71,6 @@ public class KeyWordsFinderTest {
         result = keyWordsFinder.findKeyWords(input);
         assertEquals(expectedResult,result);
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test(expected = Exception.class)
     public void failedAttemptToCreateKeyWordFinderWithNullKeyWords() throws Exception{
