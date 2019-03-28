@@ -6,6 +6,7 @@ import main.java.films_collection.FilmsCollection;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,7 +28,7 @@ public class FilmsCollectionTests {
         Actor actor = new Actor(name,surname);
         Film film = new Film(filmTitle,actor);
         FilmsCollection collection = new FilmsCollection(title,film);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film);
         assertEquals(title,collection.getTitle());
         assertEquals(films,collection.getFilms());
@@ -46,7 +47,7 @@ public class FilmsCollectionTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         films.add(film2);
         FilmsCollection collection = new FilmsCollection(title,films);
@@ -78,7 +79,7 @@ public class FilmsCollectionTests {
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
         collection.setFilms(film2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film2);
         assertEquals(films,collection.getFilms());
     }
@@ -111,7 +112,7 @@ public class FilmsCollectionTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         films.add(film2);
         collection.setFilms(films);
@@ -133,7 +134,7 @@ public class FilmsCollectionTests {
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
         collection.addFilm(film2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         films.add(film2);
         assertEquals(films,collection.getFilms());
@@ -150,7 +151,7 @@ public class FilmsCollectionTests {
         FilmsCollection collection = new FilmsCollection(title,film1);
         Film nullFilm = null;
         collection.addFilm(nullFilm);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         assertEquals(films,collection.getFilms());
     }
@@ -171,7 +172,7 @@ public class FilmsCollectionTests {
         FilmsCollection collection = new FilmsCollection(title,film1);
         collection.addFilm(film2);
         collection.removeFilm(film1);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film2);
         assertEquals(films,collection.getFilms());
     }

@@ -1,14 +1,11 @@
 package main.java.films_collection;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Film implements Serializable, Comparable<Film> {
     private String title;
-    private HashSet<Actor> actors;
+    private Set<Actor> actors;
 
     /**
      * Constructor of Film with mandatory title parameter.
@@ -38,7 +35,7 @@ public class Film implements Serializable, Comparable<Film> {
      * @param actors - HashSet of Actor
      * @throws Exception if title is null
      */
-    public Film(String title, HashSet<Actor> actors) throws Exception{
+    public Film(String title, Set<Actor> actors) throws Exception{
         setTitle(title);
         this.actors = new HashSet<>();
         setActors(actors);
@@ -61,7 +58,7 @@ public class Film implements Serializable, Comparable<Film> {
      * @param actor - object of Actor
      */
     public void setActors(Actor actor){
-        HashSet<Actor> updatedActors=new HashSet<>();
+        Set<Actor> updatedActors=new HashSet<>();
         if(actor!=null){
             updatedActors.add(actor);
         }
@@ -72,8 +69,8 @@ public class Film implements Serializable, Comparable<Film> {
      * Setter method for actors.
      * @param actors - HashSet of Actor
      */
-    public void setActors(HashSet<Actor> actors){
-        HashSet<Actor> updatedActors=new HashSet<>();
+    public void setActors(Set<Actor> actors){
+        Set<Actor> updatedActors=new HashSet<>();
         if(actors!=null){
             updatedActors=actors;
         }
@@ -92,7 +89,7 @@ public class Film implements Serializable, Comparable<Film> {
      * Getter method for actors.
      * @return HashSet of Actor
      */
-    public HashSet<Actor> getActors(){
+    public Set<Actor> getActors(){
         return actors;
     }
 
@@ -120,7 +117,7 @@ public class Film implements Serializable, Comparable<Film> {
         film.append(title);
         film.append("\nActors:");
         if(actors.size()!=0){
-            TreeSet<Actor> actorsSorted = new TreeSet<>(actors);
+            Set<Actor> actorsSorted = new TreeSet<>(actors);
             for (Actor actor: actorsSorted){
                 film.append("\n");
                 film.append(actor.toString());
@@ -182,9 +179,9 @@ public class Film implements Serializable, Comparable<Film> {
         } else if (actors!=null && otherFilm.actors!=null && actors.size()!=otherFilm.actors.size()){
             return (actors.size()<otherFilm.actors.size()) ? 1 : -1;
         } else if (actors!=null && otherFilm.actors!=null && actors.size()==otherFilm.actors.size()){
-            TreeSet<Actor> actorsSorted = new TreeSet<>(actors);
+            Set<Actor> actorsSorted = new TreeSet<>(actors);
             Iterator<Actor> itrActor = actorsSorted.iterator();
-            TreeSet<Actor> otherActorsSorted = new TreeSet<>(otherFilm.actors);
+            Set<Actor> otherActorsSorted = new TreeSet<>(otherFilm.actors);
             Iterator<Actor> itrOtherActor = otherActorsSorted.iterator();
             while(itrActor.hasNext()){
                 int compare = itrActor.next().compareTo(itrOtherActor.next());

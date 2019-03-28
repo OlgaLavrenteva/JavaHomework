@@ -7,6 +7,7 @@ import main.java.films_collection.FilmsCollectionManager;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,7 +25,7 @@ public class FilmsCollectionManagerTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         films.add(film2);
         FilmsCollection collection = new FilmsCollection(title,films);
@@ -47,7 +48,7 @@ public class FilmsCollectionManagerTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(filmTitle2,actor2);
-        HashSet<Film> films = new HashSet<>();
+        Set<Film> films = new HashSet<>();
         films.add(film1);
         films.add(film2);
         FilmsCollection collection = new FilmsCollection(title,films);

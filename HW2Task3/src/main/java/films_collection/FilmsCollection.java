@@ -2,11 +2,12 @@ package main.java.films_collection;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class FilmsCollection implements Serializable {
     private String title;
-    private HashSet<Film> films;
+    private Set<Film> films;
 
     /**
      * Constructor of FilmsCollection with mandatory title parameter.
@@ -36,7 +37,7 @@ public class FilmsCollection implements Serializable {
      * @param films - HashSet of Film
      * @throws Exception if title is null
      */
-    public FilmsCollection(String title, HashSet<Film> films) throws Exception{
+    public FilmsCollection(String title, Set<Film> films) throws Exception{
         setTitle(title);
         this.films = new HashSet<>();
         setFilms(films);
@@ -59,7 +60,7 @@ public class FilmsCollection implements Serializable {
      * @param film - object of Film
      */
     public void setFilms(Film film){
-        HashSet<Film> changedFilms = new HashSet<>();
+        Set<Film> changedFilms = new HashSet<>();
         if(film!=null){
             changedFilms.add(film);
         }
@@ -70,8 +71,8 @@ public class FilmsCollection implements Serializable {
      * Setter method for films.
      * @param films - HashSet of Film
      */
-    public void setFilms(HashSet<Film> films){
-        HashSet<Film> changedFilms = new HashSet<>();
+    public void setFilms(Set<Film> films){
+        Set<Film> changedFilms = new HashSet<>();
         if(films!=null){
             changedFilms=films;
         }
@@ -90,7 +91,7 @@ public class FilmsCollection implements Serializable {
      * Getter method for films.
      * @return HashSet of Film
      */
-    public HashSet<Film> getFilms(){
+    public Set<Film> getFilms(){
         return films;
     }
 
@@ -118,7 +119,7 @@ public class FilmsCollection implements Serializable {
         collection.append(title);
         collection.append("\nFilms:");
         if(films.size()!=0){
-            TreeSet<Film> filmsSorted = new TreeSet<>(films);
+            Set<Film> filmsSorted = new TreeSet<>(films);
             for (Film film: filmsSorted){
                 collection.append("\n");
                 collection.append(film.toString());
