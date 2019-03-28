@@ -1,6 +1,7 @@
 package main.java.finder;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -46,7 +47,7 @@ public class KeyWordsFinder{
             throw new Exception("String for search should be not null.");
         }
         String[] arrKeyWords = keyWords.split(" ");
-        HashMap<String, Integer> matches = new HashMap<String, Integer>();
+        Map<String, Integer> matches = new HashMap<>();
 
         for(int i=0; i<arrKeyWords.length; i++){
             String substr = "(^|[^a-zA-Z])" + arrKeyWords[i] + "([^a-zA-Z]|$)";

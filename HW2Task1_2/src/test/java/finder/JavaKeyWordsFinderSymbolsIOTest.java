@@ -1,11 +1,15 @@
 package test.java.finder;
 
 import main.java.finder.JavaKeyWordsFinderSymbolsIO;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class JavaKeyWordsFinderSymbolsIOTest {
@@ -40,7 +44,7 @@ public class JavaKeyWordsFinderSymbolsIOTest {
                 "assert: 1 class: 1 break: 1 volatile: 1 abstract: 1 int: 1 instanceof: 1 super: 1 boolean: 1 throw: 1 " +
                 "char: 1 short: 1 return: 1";
 
-        assertTrue(expectedOutputFileContent.equals(input.toString().trim()));
+        assertEquals(input.toString().trim(),expectedOutputFileContent);
     }
 
     @Test
@@ -67,7 +71,7 @@ public class JavaKeyWordsFinderSymbolsIOTest {
         String expectedOutputFileContent = "101 new: 11 private: 9 package: 1 static: 2 void: 7 import: 1 for: 4 " +
                 "this: 5 int: 14 public: 11 else: 4 final: 2 if: 16 class: 5 return: 9";
 
-        assertTrue(expectedOutputFileContent.equals(input.toString().trim()));
+        assertEquals(input.toString().trim(),expectedOutputFileContent);
     }
 
     @Test
@@ -93,8 +97,11 @@ public class JavaKeyWordsFinderSymbolsIOTest {
 
         String expectedOutputFileContent = "0";
 
-        assertTrue(expectedOutputFileContent.equals(input.toString().trim()));
+        assertEquals(input.toString().trim(),expectedOutputFileContent);
     }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void inputFileDoesNotExist(){
@@ -102,7 +109,8 @@ public class JavaKeyWordsFinderSymbolsIOTest {
         try {
             JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
-            assertTrue(e.getMessage().equals("NotExistingFile doesn't exist."));
+            thrown.expect(IOException.class);
+            thrown.expectMessage("NotExistingFile doesn't exist.");
         }
     }
 
@@ -113,29 +121,24 @@ public class JavaKeyWordsFinderSymbolsIOTest {
         try {
             JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
         } catch (Exception e) {
-            assertTrue(e.getMessage().equals("NotExistingFile doesn't exist."));
+            thrown.expect(IOException.class);
+            thrown.expectMessage("NotExistingFile doesn't exist.");
         }
     }
 
-    @Test
-    public void inputFileIsNull(){
+    @Test(expected = Exception.class)
+    public void inputFileIsNull() throws Exception{
         String inputFile = null;
-        try {
-            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            assertTrue(e.getMessage().equals("Input file is not passed."));
-        }
+        JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
+        thrown.expectMessage("Input file is not passed.");
     }
 
-    @Test
-    public void outputFileIsNull(){
+    @Test(expected = Exception.class)
+    public void outputFileIsNull() throws Exception{
         String inputFile = currentDir + "\\HW2Task1_2\\src\\test\\java\\finder\\EmptyFileForAnalyzing.java";
         outputFile = null;
-        try {
-            JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
-        } catch (Exception e) {
-            assertTrue(e.getMessage().equals("Output file is not passed."));
-        }
+        JavaKeyWordsFinderSymbolsIO.findJavaKeyWords(inputFile, outputFile);
+        thrown.expectMessage("Output file is not passed.");
     }
 }
 

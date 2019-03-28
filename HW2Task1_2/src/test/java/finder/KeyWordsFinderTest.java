@@ -2,8 +2,11 @@ package test.java.finder;
 
 import main.java.finder.KeyWordsFinder;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class KeyWordsFinderTest {
@@ -11,7 +14,7 @@ public class KeyWordsFinderTest {
     public void validKeyWordsFinderCreation() throws Exception{
         String notNullString = "for if";
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder(notNullString);
-        assertTrue(keyWordsFinder.getKeyWords().equals(notNullString));
+        assertEquals(notNullString,keyWordsFinder.getKeyWords());
     }
 
     @Test
@@ -19,7 +22,7 @@ public class KeyWordsFinderTest {
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder("setValidKeyWords");
         String notNullString = "for if";
         keyWordsFinder.setKeyWords(notNullString);
-        assertTrue(keyWordsFinder.getKeyWords().equals(notNullString));
+        assertEquals(notNullString,keyWordsFinder.getKeyWords());
     }
 
     @Test
@@ -30,7 +33,7 @@ public class KeyWordsFinderTest {
         String result = null;
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
         result = keyWordsFinder.findKeyWords(input);
-        assertTrue(result.equals(expectedResult));
+        assertEquals(expectedResult,result);
     }
 
     @Test
@@ -41,7 +44,7 @@ public class KeyWordsFinderTest {
         String result = null;
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
         result = keyWordsFinder.findKeyWords(input);
-        assertTrue(result.equals(expectedResult));
+        assertEquals(expectedResult,result);
     }
 
     @Test
@@ -52,7 +55,7 @@ public class KeyWordsFinderTest {
         String result = null;
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
         result = keyWordsFinder.findKeyWords(input);
-        assertTrue(result.equals(expectedResult));
+        assertEquals(expectedResult,result);
     }
 
     @Test
@@ -63,41 +66,35 @@ public class KeyWordsFinderTest {
         String result = null;
         KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
         result = keyWordsFinder.findKeyWords(input);
-        assertTrue(result.equals(expectedResult));
+        assertEquals(expectedResult,result);
     }
 
-    @Test
-    public void failedAttemptToCreateKeyWordFinderWithNullKeyWords(){
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test(expected = Exception.class)
+    public void failedAttemptToCreateKeyWordFinderWithNullKeyWords() throws Exception{
         String nullString = null;
-        try {
-            KeyWordsFinder keyWordsFinder = new KeyWordsFinder(nullString);
-        } catch(Exception e){
-            assertTrue(e.getMessage().equals("String with key words should be not null."));
-        }
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(nullString);
+        thrown.expectMessage("String with key words should be not null.");
     }
 
-    @Test
-    public void failedAttemptToSetNullKeyWords(){
-        try{
-            KeyWordsFinder keyWordsFinder = new KeyWordsFinder("setValidKeyWords");
-            String nullString = null;
-            keyWordsFinder.setKeyWords(nullString);
-        } catch(Exception e){
-            assertTrue(e.getMessage().equals("String with key words should be not null."));
-        }
+    @Test(expected = Exception.class)
+    public void failedAttemptToSetNullKeyWords() throws Exception{
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder("setValidKeyWords");
+        String nullString = null;
+        keyWordsFinder.setKeyWords(nullString);
+        thrown.expectMessage("String with key words should be not null.");
     }
 
-    @Test
-    public void inputIsNull(){
+    @Test(expected = Exception.class)
+    public void inputIsNull() throws Exception{
         String pattern = "for if";
         String input = null;
         String expectedResult = "0";
         String result = null;
-        try {
-            KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
-            result = keyWordsFinder.findKeyWords(input);
-        } catch(Exception e){
-            assertTrue(e.getMessage().equals("String for search should be not null."));
-        }
+        KeyWordsFinder keyWordsFinder = new KeyWordsFinder(pattern);
+        result = keyWordsFinder.findKeyWords(input);
+        thrown.expectMessage("String with key words should be not null.");
     }
 }

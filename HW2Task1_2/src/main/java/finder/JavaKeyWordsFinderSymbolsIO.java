@@ -3,11 +3,6 @@ package main.java.finder;
 import java.io.*;
 
 public class JavaKeyWordsFinderSymbolsIO {
-    static final String JAVA_KEY_WORDS = "abstract continue for new switch assert default goto package synchronized " +
-            "boolean do if private this break double implements protected throw byte else import public throws case " +
-            "enum instanceof return transient catch extends int short try char final interface static void class finally " +
-            "long strictfp volatile const float native super while";
-
     /**
      * The method takes inputFile, looks for Java Key Words listed in JAVA_KEY_WORDS constant and then puts matches and
      * their count into outputFile. The method throws exception in case of nonexistent input or output file.
@@ -32,7 +27,7 @@ public class JavaKeyWordsFinderSymbolsIO {
             }
 
             try{
-                KeyWordsFinder javaWordsFinder = new KeyWordsFinder(JAVA_KEY_WORDS);
+                KeyWordsFinder javaWordsFinder = new KeyWordsFinder(JavaKeyWordsFinderBytesIO.JAVA_KEY_WORDS);
                 foundMatches = javaWordsFinder.findKeyWords(input.toString());
             } catch (Exception e){
                 System.out.println(e.getMessage());
