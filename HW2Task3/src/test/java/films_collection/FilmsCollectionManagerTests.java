@@ -4,8 +4,11 @@ import main.java.films_collection.Actor;
 import main.java.films_collection.Film;
 import main.java.films_collection.FilmsCollection;
 import main.java.films_collection.FilmsCollectionManager;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,30 +62,25 @@ public class FilmsCollectionManagerTests {
         assertEquals(collection.toString(),collectionRestored.toString());
     }
 
-    @Test
-    public void storeNullCollection(){
-        try {
-            FilmsCollection collection = null;
-            String currentDir = System.getProperty("user.dir");
-            String collectionStore = currentDir + "\\out\\Collection.txt";
-            FilmsCollectionManager.storeCollection(collection, collectionStore);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Films collection is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test(expected = Exception.class)
+    public void storeNullCollection() throws Exception{
+        FilmsCollection collection = null;
+        String currentDir = System.getProperty("user.dir");
+        String collectionStore = currentDir + "\\out\\Collection.txt";
+        FilmsCollectionManager.storeCollection(collection, collectionStore);
+        thrown.expectMessage("Films collection is null.");
     }
 
-    @Test
-    public void storeNullFile(){
-        try {
-            String title = "Collection1";
-            FilmsCollection collection = new FilmsCollection(title);
-            String collectionStore = null;
-            FilmsCollectionManager.storeCollection(collection, collectionStore);
-        } catch (Exception e){
-            String expectedExceptionMessage = "File is null";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void storeNullFile() throws Exception{
+        String title = "Collection1";
+        FilmsCollection collection = new FilmsCollection(title);
+        String collectionStore = null;
+        FilmsCollectionManager.storeCollection(collection, collectionStore);
+        thrown.expectMessage("File is null");
     }
 
     @Test
@@ -93,20 +91,16 @@ public class FilmsCollectionManagerTests {
             String collectionStore = "DoesNotExist";
             FilmsCollectionManager.storeCollection(collection, collectionStore);
         } catch (Exception e){
-            String expectedExceptionMessage = "DoesNotExist doesn't exist.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
+            thrown.expect(IOException.class);
+            thrown.expectMessage("DoesNotExist doesn't exist.");
         }
     }
 
-    @Test
-    public void restoreNullFile(){
-        try {
-            String collectionStore = null;
-            FilmsCollectionManager.restoreCollection(collectionStore);
-        } catch (Exception e){
-            String expectedExceptionMessage = "File is null";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void restoreNullFile() throws Exception{
+        String collectionStore = null;
+        FilmsCollectionManager.restoreCollection(collectionStore);
+        thrown.expectMessage("File is null");
     }
 
     @Test
@@ -115,8 +109,8 @@ public class FilmsCollectionManagerTests {
             String collectionStore = "DoesNotExist";
             FilmsCollectionManager.restoreCollection(collectionStore);
         } catch (Exception e){
-            String expectedExceptionMessage = "DoesNotExist doesn't exist.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
+            thrown.expect(IOException.class);
+            thrown.expectMessage("DoesNotExist doesn't exist.");
         }
     }
 }

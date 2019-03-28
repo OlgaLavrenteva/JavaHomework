@@ -2,7 +2,9 @@ package test.java.films_collection;
 
 import main.java.films_collection.Actor;
 import main.java.films_collection.Film;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -329,28 +331,23 @@ public class FilmTests {
         assertTrue(film2.compareTo(film1)>0);
     }
 
-    @Test
-    public void createFilmWithInvalidTitle(){
-        try {
-            String invalidTitle = null;
-            Film film = new Film(invalidTitle);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Film title is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test(expected = Exception.class)
+    public void createFilmWithInvalidTitle() throws Exception{
+        String invalidTitle = null;
+        Film film = new Film(invalidTitle);
+        thrown.expectMessage("Film title is null.");
     }
 
-    @Test
-    public void setInvalidTitle(){
-        try {
-            String title = "Film1";
-            Film film = new Film(title);
-            String invalidTitle = null;
-            film.setTitle(invalidTitle);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Film title is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void setInvalidTitle() throws Exception{
+        String title = "Film1";
+        Film film = new Film(title);
+        String invalidTitle = null;
+        film.setTitle(invalidTitle);
+        thrown.expectMessage("Film title is null.");
     }
 
     @Test(expected = NullPointerException.class)

@@ -3,7 +3,9 @@ package test.java.films_collection;
 import main.java.films_collection.Actor;
 import main.java.films_collection.Film;
 import main.java.films_collection.FilmsCollection;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -207,28 +209,23 @@ public class FilmsCollectionTests {
         assertEquals(expectedFilmsCollectionString,collection.toString());
     }
 
-    @Test
-    public void createFilmsCollectionWithInvalidTitle(){
-        try {
-            String invalidTitle = null;
-            FilmsCollection collection = new FilmsCollection(invalidTitle);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Collection title is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test(expected = Exception.class)
+    public void createFilmsCollectionWithInvalidTitle() throws Exception{
+        String invalidTitle = null;
+        FilmsCollection collection = new FilmsCollection(invalidTitle);
+        thrown.expectMessage("Collection title is null.");
     }
 
-    @Test
-    public void setInvalidTitle(){
-        try {
-            String title = "Collection1";
-            FilmsCollection collection = new FilmsCollection(title);
-            String invalidTitle = null;
-            collection.setTitle(invalidTitle);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Collection title is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void setInvalidTitle() throws Exception{
+        String title = "Collection1";
+        FilmsCollection collection = new FilmsCollection(title);
+        String invalidTitle = null;
+        collection.setTitle(invalidTitle);
+        thrown.expectMessage("Collection title is null.");
     }
 
 }

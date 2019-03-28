@@ -1,7 +1,9 @@
 package test.java.films_collection;
 
 import main.java.films_collection.Actor;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -247,57 +249,43 @@ public class ActorTests {
         assertTrue(actor2.compareTo(actor1)>0);
     }
 
-    @Test
-    public void createActorWithInvalidName(){
-        try {
-            String invalidName = null;
-            String surname = "Surname1";
-            Actor actor = new Actor(invalidName,surname);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Name is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test(expected = Exception.class)
+    public void createActorWithInvalidName() throws Exception{
+        String invalidName = null;
+        String surname = "Surname1";
+        Actor actor = new Actor(invalidName,surname);
+        thrown.expectMessage("Name is null.");
     }
 
-    @Test
-    public void createActorWithInvalidSurname(){
-        try {
-            String name = "Name1";
-            String invalidSurname = null;
-            Actor actor = new Actor(name,invalidSurname);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Surname is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void createActorWithInvalidSurname() throws Exception{
+        String name = "Name1";
+        String invalidSurname = null;
+        Actor actor = new Actor(name,invalidSurname);
+        thrown.expectMessage("Surname is null.");
     }
 
-    @Test
-    public void setInvalidActorName(){
-        try{
-            String name = "Name1";
-            String surname = "Surname1";
-            Actor actor = new Actor(name,surname);
-            String invalidName = null;
-            actor.setName(invalidName);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Name is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
-
+    @Test(expected = Exception.class)
+    public void setInvalidActorName() throws Exception{
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor = new Actor(name,surname);
+        String invalidName = null;
+        actor.setName(invalidName);
+        thrown.expectMessage("Name is null.");
     }
 
-    @Test
-    public void setInvalidActorSurname(){
-        try{
-            String name = "Name1";
-            String surname = "Surname1";
-            Actor actor = new Actor(name,surname);
-            String invalidSurname = null;
-            actor.setSurname(invalidSurname);
-        } catch (Exception e){
-            String expectedExceptionMessage = "Surname is null.";
-            assertEquals(expectedExceptionMessage,e.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void setInvalidActorSurname() throws Exception{
+        String name = "Name1";
+        String surname = "Surname1";
+        Actor actor = new Actor(name,surname);
+        String invalidSurname = null;
+        actor.setSurname(invalidSurname);
+        thrown.expectMessage("Surname is null.");
     }
 
     @Test(expected = NullPointerException.class)
