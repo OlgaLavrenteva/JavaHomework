@@ -9,9 +9,7 @@ import org.junit.rules.ExpectedException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class FilmTests {
     @Rule
@@ -214,8 +212,8 @@ public class FilmTests {
         Actor actor = new Actor(name,surname);
         Film film1 = new Film(title1,actor);
         Film film2 = new Film(title2,actor);
-        assertTrue(!film1.equals(film2));
-        assertTrue(!film2.equals(film1));
+        assertFalse(film1.equals(film2));
+        assertFalse(film2.equals(film1));
     }
 
     @Test
@@ -229,15 +227,15 @@ public class FilmTests {
         String surname2 = "Surname2";
         Actor actor2 = new Actor(name2,surname2);
         Film film2 = new Film(title,actor2);
-        assertTrue(!film1.equals(film2));
-        assertTrue(!film2.equals(film1));
+        assertFalse(film1.equals(film2));
+        assertFalse(film2.equals(film1));
     }
 
     @Test
     public void equalsFilmsOtherObjectClass() throws Exception{
         String title = "Film1";
         Film film = new Film(title);
-        assertTrue(!film.equals(title));
+        assertFalse(film.equals(title));
     }
 
     @Test
@@ -245,7 +243,7 @@ public class FilmTests {
         String title = "Film1";
         Film film1 = new Film(title);
         Film film2 = null;
-        assertTrue(!film1.equals(film2));
+        assertFalse(film1.equals(film2));
     }
 
     @Test
@@ -268,7 +266,7 @@ public class FilmTests {
         Actor actor = new Actor(name,surname);
         Film film1 = new Film(title1,actor);
         Film film2 = new Film(title2,actor);
-        assertTrue(!(film1.hashCode()==film2.hashCode()));
+        assertFalse(film1.hashCode()==film2.hashCode());
     }
 
     @Test

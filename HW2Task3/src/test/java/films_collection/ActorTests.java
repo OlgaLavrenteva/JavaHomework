@@ -5,9 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ActorTests {
     @Rule
@@ -132,8 +130,8 @@ public class ActorTests {
         String dateOfBirth = "End of 1970";
         Actor actor1 = new Actor(name,surname,dateOfBirth);
         Actor actor2 = new Actor(name,surname);
-        assertTrue(!actor1.equals(actor2));
-        assertTrue(!actor2.equals(actor1));
+        assertFalse(actor1.equals(actor2));
+        assertFalse(actor2.equals(actor1));
     }
 
     @Test
@@ -142,7 +140,7 @@ public class ActorTests {
         String surname = "Surname1";
         String dateOfBirth = "End of 1970";
         Actor actor = new Actor(name,surname,dateOfBirth);
-        assertTrue(!actor.equals(name));
+        assertFalse(actor.equals(name));
     }
 
     @Test
@@ -152,7 +150,7 @@ public class ActorTests {
         String dateOfBirth = "End of 1970";
         Actor actor1 = new Actor(name,surname,dateOfBirth);
         Actor actor2 = null;
-        assertTrue(!actor1.equals(actor2));
+        assertFalse(actor1.equals(actor2));
     }
 
     @Test
@@ -173,7 +171,7 @@ public class ActorTests {
         String dateOfBirth2 = "12/30/1968";
         Actor actor1 = new Actor(name,surname,dateOfBirth1);
         Actor actor2 = new Actor(name,surname,dateOfBirth2);
-        assertTrue(!(actor1.hashCode()==actor2.hashCode()));
+        assertFalse(actor1.hashCode()==actor2.hashCode());
     }
 
     @Test
